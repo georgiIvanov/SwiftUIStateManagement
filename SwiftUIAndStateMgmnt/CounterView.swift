@@ -22,7 +22,7 @@ struct PrimeAlert: Identifiable {
 
 struct CounterView: View {
     
-    @ObservedObject var store: Store<AppState>
+    @ObservedObject var store: Store<AppState, AppAction>
     @State var isPrimeModalShown = false
     @State var alertNthPrime: PrimeAlert?
     @State var isNthPrimeButtonDisabled = false
@@ -32,11 +32,11 @@ struct CounterView: View {
     var body: some View {
         VStack {
             HStack {
-                Button(action: { store.value.count -= 1 }) {
+                Button(action: { store.send(.counter(.decrTapped)) }) {
                     Text("-")
                 }
                 Text("\(store.value.count)")
-                Button(action: { store.value.count += 1 }) {
+                Button(action: { store.send(.counter(.incrTapped)) }) {
                     Text("+")
                 }
             }

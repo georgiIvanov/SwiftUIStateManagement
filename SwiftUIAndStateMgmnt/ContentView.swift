@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var store: Store<AppState>
+    @ObservedObject var store: Store<AppState, AppAction>
     
     var body: some View {
         NavigationView {
@@ -27,6 +27,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(store: Store<AppState>(initialValue: AppState()))
+        ContentView(store: Store<AppState, AppAction>(initialValue: AppState(),
+                                                      reducer: counterReducer(state:action:)))
     }
 }
