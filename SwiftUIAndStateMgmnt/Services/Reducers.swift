@@ -19,18 +19,15 @@ func combine<Value, Action>(
 
 func pullback<LocalValue, GlobalValue, Action>(
     _ reducer: @escaping (inout LocalValue, Action) -> Void,
-    get: @escaping (GlobalValue) -> LocalValue,
-    set: @escaping (inout GlobalValue, LocalValue) -> Void
+    value: WritableKeyPath<GlobalValue, LocalValue>
 ) -> (inout GlobalValue, Action) -> Void {
     return { globalValue, action in
-        var localValue = get(globalValue)
-        reducer(&localValue, action)
-        set(&globalValue, localValue)
+        reducer(&globalValue[keyPath: value], action)
     }
 }
 
 func createAppReducer() -> (inout AppState, AppAction) -> Void {
-    return combine(pullback(counterReducer(state:action:), get: { $0.count }, set: { $0.count = $1 }),
+    return combine(pullback(counterReducer, value: \.count),
                    primeModalReducer(state:action:),
                    favoritePrimesReducer(state:action:))
 }
