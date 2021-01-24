@@ -17,32 +17,32 @@ private func isPrime (_ p: Int) -> Bool {
 }
 
 struct IsPrimeModalView: View {
-    @ObservedObject var state: AppState
+    @ObservedObject var store: Store<AppState>
     
     var body: some View {
         VStack {
-            if isPrime(self.state.count) {
-                Text("\(self.state.count) is prime 🎉")
-                if self.state.favoritePrimes.contains(self.state.count) {
+            if isPrime(store.value.count) {
+                Text("\(store.value.count) is prime 🎉")
+                if store.value.favoritePrimes.contains(store.value.count) {
                     Button(action: {
-                        self.state.favoritePrimes
-                            .removeAll { $0 == self.state.count }
-                        self.state.activityFeed.append(.init(timestamp: Date(),
-                                                             type: .removedFavoritePrime(self.state.count)))
+                        store.value.favoritePrimes
+                            .removeAll { $0 == store.value.count }
+                        store.value.activityFeed.append(.init(timestamp: Date(),
+                                                              type: .removedFavoritePrime(store.value.count)))
                     }, label: {
                         Text("Remove from favorite primes.")
                     })
                 } else {
                     Button(action: {
-                        self.state.favoritePrimes.append(self.state.count)
-                        self.state.activityFeed.append(.init(timestamp: Date(),
-                                                             type: .addedFavoritePrime(self.state.count)))
+                        store.value.favoritePrimes.append(store.value.count)
+                        store.value.activityFeed.append(.init(timestamp: Date(),
+                                                             type: .addedFavoritePrime(store.value.count)))
                     }, label: {
                         Text("Save to favorite primes.")
                     })
                 }
             } else {
-                Text("\(self.state.count) is not prime :(")
+                Text("\(store.value.count) is not prime :(")
             }
         }
         
@@ -51,6 +51,6 @@ struct IsPrimeModalView: View {
 
 struct IsPrimeModalView_Previews: PreviewProvider {
     static var previews: some View {
-        IsPrimeModalView(state: AppState())
+        IsPrimeModalView(store: Store<AppState>(initialValue: AppState()))
     }
 }

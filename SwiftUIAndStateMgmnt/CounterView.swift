@@ -22,7 +22,7 @@ struct PrimeAlert: Identifiable {
 
 struct CounterView: View {
     
-    @ObservedObject var state: AppState
+    @ObservedObject var store: Store<AppState>
     @State var isPrimeModalShown = false
     @State var alertNthPrime: PrimeAlert?
     @State var isNthPrimeButtonDisabled = false
@@ -32,11 +32,11 @@ struct CounterView: View {
     var body: some View {
         VStack {
             HStack {
-                Button(action: { self.state.count -= 1 }) {
+                Button(action: { store.value.count -= 1 }) {
                     Text("-")
                 }
-                Text("\(self.state.count)")
-                Button(action: { self.state.count += 1 }) {
+                Text("\(store.value.count)")
+                Button(action: { store.value.count += 1 }) {
                     Text("+")
                 }
             }
@@ -46,25 +46,25 @@ struct CounterView: View {
                 Text("Is this prime?")
             }
             Button(action: self.nthPrimeButtonAction) {
-                Text("What is the \(ordinal(self.state.count)) prime?")
+                Text("What is the \(ordinal(store.value.count)) prime?")
             }
             .disabled(self.isNthPrimeButtonDisabled)
         }
         .font(.title)
         .navigationTitle("Counter demo")
-        .alert(item: self.$alertNthPrime, content: { (item) -> Alert in
-            Alert(title: Text("The \(ordinal(self.state.count)) prime is \(item.prime)"),
+        .alert(item: self.$alertNthPrime, content: { (item: PrimeAlert) -> Alert in
+            Alert(title: Text("The \(ordinal(store.value.count)) prime is \(item.prime)"),
                   dismissButton: .default(Text("Ok")))
         })
         .sheet(isPresented: self.$isPrimeModalShown) {
-            IsPrimeModalView(state: self.state)
+            IsPrimeModalView(store: store)
         }
         
     }
     
     func nthPrimeButtonAction() {
         self.isNthPrimeButtonDisabled = true
-        webRequests.nthPrime(self.state.count) { (prime) in
+        webRequests.nthPrime(store.value.count) { (prime) in
             self.isNthPrimeButtonDisabled = false
             self.alertNthPrime = prime.map(PrimeAlert.init(prime:))
         }
