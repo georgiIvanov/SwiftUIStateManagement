@@ -23,6 +23,7 @@
 		97754F7925BCB9560099EDDC /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97754F7825BCB9560099EDDC /* CounterView.swift */; };
 		9778CB0325BE0C0300E969CF /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB0225BE0C0300E969CF /* Store.swift */; };
 		9778CB0825BE0FC600E969CF /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB0725BE0FC600E969CF /* AppActions.swift */; };
+		9778CB1025BE28E400E969CF /* Reducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB0F25BE28E400E969CF /* Reducers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		97754F7825BCB9560099EDDC /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		9778CB0225BE0C0300E969CF /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		9778CB0725BE0FC600E969CF /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
+		9778CB0F25BE28E400E969CF /* Reducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				973A52CD25BCD31C004BD18A /* WebRequestsService.swift */,
+				9778CB0F25BE28E400E969CF /* Reducers.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				973A52D625BCE327004BD18A /* FavoritePrimesView.swift in Sources */,
 				97754F4525BCB9190099EDDC /* ContentView.swift in Sources */,
 				9778CB0325BE0C0300E969CF /* Store.swift in Sources */,
+				9778CB1025BE28E400E969CF /* Reducers.swift in Sources */,
 				97754F7425BCB93A0099EDDC /* AppState.swift in Sources */,
 				9778CB0825BE0FC600E969CF /* AppActions.swift in Sources */,
 				973A52BF25BCCB50004BD18A /* IsPrimeModalView.swift in Sources */,
