@@ -24,6 +24,7 @@
 		9778CB0325BE0C0300E969CF /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB0225BE0C0300E969CF /* Store.swift */; };
 		9778CB0825BE0FC600E969CF /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB0725BE0FC600E969CF /* AppActions.swift */; };
 		9778CB1025BE28E400E969CF /* Reducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB0F25BE28E400E969CF /* Reducers.swift */; };
+		9778CB1525BE3E6000E969CF /* FavoritePrimesState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB1425BE3E6000E969CF /* FavoritePrimesState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		9778CB0225BE0C0300E969CF /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		9778CB0725BE0FC600E969CF /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		9778CB0F25BE28E400E969CF /* Reducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducers.swift; sourceTree = "<group>"; };
+		9778CB1425BE3E6000E969CF /* FavoritePrimesState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePrimesState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				97754F7325BCB93A0099EDDC /* AppState.swift */,
+				9778CB1425BE3E6000E969CF /* FavoritePrimesState.swift */,
 				973A52C425BCD266004BD18A /* WolframAlphaResult.swift */,
 				9778CB0225BE0C0300E969CF /* Store.swift */,
 				9778CB0725BE0FC600E969CF /* AppActions.swift */,
@@ -314,6 +317,7 @@
 				97754F4325BCB9190099EDDC /* SceneDelegate.swift in Sources */,
 				973A52D625BCE327004BD18A /* FavoritePrimesView.swift in Sources */,
 				97754F4525BCB9190099EDDC /* ContentView.swift in Sources */,
+				9778CB1525BE3E6000E969CF /* FavoritePrimesState.swift in Sources */,
 				9778CB0325BE0C0300E969CF /* Store.swift in Sources */,
 				9778CB1025BE28E400E969CF /* Reducers.swift in Sources */,
 				97754F7425BCB93A0099EDDC /* AppState.swift in Sources */,

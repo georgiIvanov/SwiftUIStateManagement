@@ -29,7 +29,7 @@ func pullback<LocalValue, GlobalValue, Action>(
 func createAppReducer() -> (inout AppState, AppAction) -> Void {
     return combine(pullback(counterReducer, value: \.count),
                    primeModalReducer(state:action:),
-                   favoritePrimesReducer(state:action:))
+                   pullback(favoritePrimesReducer, value: \.favoritePrimesState))
 }
 
 func counterReducer(state: inout Int, action: AppAction) {
@@ -56,13 +56,14 @@ func primeModalReducer(state: inout AppState, action: AppAction) {
     }
 }
 
-func favoritePrimesReducer(state: inout AppState, action: AppAction) {
+func favoritePrimesReducer(state: inout FavoritePrimesState, action: AppAction) {
     switch action {
     case .favoritePrimes(.deleteFavoritePrimes(let indexSet)):
         for index in indexSet {
+            let prime = state.favoritePrimes[index]
             state.favoritePrimes.remove(at: index)
             state.activityFeed.append(.init(timestamp: Date(),
-                                            type: .removedFavoritePrime(state.count)))
+                                            type: .removedFavoritePrime(prime)))
         }
     default:
         break

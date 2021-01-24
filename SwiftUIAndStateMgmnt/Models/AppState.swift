@@ -30,3 +30,17 @@ struct AppState {
         let bio: String
     }
 }
+
+extension AppState {
+    var favoritePrimesState: FavoritePrimesState {
+        get {
+            return FavoritePrimesState(favoritePrimes: favoritePrimes,
+                                       activityFeed: activityFeed)
+        }
+        
+        set {
+            favoritePrimes = newValue.favoritePrimes
+            activityFeed = newValue.activityFeed
+        }
+    }
+}
