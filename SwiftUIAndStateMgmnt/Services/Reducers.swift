@@ -17,12 +17,30 @@ func combine<Value, Action>(
     }
 }
 
-func counterReducer(state: inout AppState, action: AppAction) {
+func pullback<LocalValue, GlobalValue, Action>(
+    _ reducer: @escaping (inout LocalValue, Action) -> Void,
+    get: @escaping (GlobalValue) -> LocalValue,
+    set: @escaping (inout GlobalValue, LocalValue) -> Void
+) -> (inout GlobalValue, Action) -> Void {
+    return { globalValue, action in
+        var localValue = get(globalValue)
+        reducer(&localValue, action)
+        set(&globalValue, localValue)
+    }
+}
+
+func createAppReducer() -> (inout AppState, AppAction) -> Void {
+    return combine(pullback(counterReducer(state:action:), get: { $0.count }, set: { $0.count = $1 }),
+                   primeModalReducer(state:action:),
+                   favoritePrimesReducer(state:action:))
+}
+
+func counterReducer(state: inout Int, action: AppAction) {
     switch action {
     case .counter(.decrTapped):
-        state.count -= 1
+        state -= 1
     case .counter(.incrTapped):
-        state.count += 1
+        state += 1
     default:
         break
     }

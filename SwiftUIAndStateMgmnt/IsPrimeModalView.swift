@@ -46,6 +46,6 @@ struct IsPrimeModalView: View {
 
 struct IsPrimeModalView_Previews: PreviewProvider {
     static var previews: some View {
-        IsPrimeModalView(store: Store(initialValue: AppState(), reducer: counterReducer(state:action:)))
+        IsPrimeModalView(store: Store(initialValue: AppState(), reducer: createAppReducer()))
     }
 }
