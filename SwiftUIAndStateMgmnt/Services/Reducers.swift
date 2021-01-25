@@ -17,12 +17,26 @@ func combine<Value, Action>(
     }
 }
 
+// Focusing from global/general state to local/specific state
 func pullback<LocalValue, GlobalValue, Action>(
     _ reducer: @escaping (inout LocalValue, Action) -> Void,
     value: WritableKeyPath<GlobalValue, LocalValue>
 ) -> (inout GlobalValue, Action) -> Void {
     return { globalValue, action in
         reducer(&globalValue[keyPath: value], action)
+    }
+}
+
+func pullback<Value, LocalAction, GlobalAction>(
+    _ reducer: @escaping (inout Value, LocalAction) -> Void,
+    action: WritableKeyPath<GlobalAction, LocalAction?>
+) -> (inout Value, GlobalAction) -> Void {
+    return { value, globalAction in
+        guard let localAction = globalAction[keyPath: action] else {
+            return
+        }
+        
+        reducer(&value, localAction)
     }
 }
 
