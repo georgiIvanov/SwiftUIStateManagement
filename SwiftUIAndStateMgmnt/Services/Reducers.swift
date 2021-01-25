@@ -31,6 +31,18 @@ func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction>(
     }
 }
 
+private func logging<Value, Action>(
+    _ reducer: @escaping (inout Value, Action) -> Void
+) -> (inout Value, Action) -> Void {
+    return { value, action in
+        reducer(&value, action)
+        print("Action: \(action)")
+        print("Value:")
+        dump(value)
+        print("---\n")
+    }
+}
+
 func activityFeed(
     _ reducer: @escaping (inout AppState, AppAction) -> Void
 ) -> (inout AppState, AppAction) -> Void {
@@ -63,7 +75,7 @@ func createAppReducer() -> (inout AppState, AppAction) -> Void {
         pullback(favoritePrimesReducer, value: \.favoritePrimes, action: \.favoritePrimes)
     )
     
-    return activityFeed(reducer)
+    return logging(activityFeed(reducer))
 }
 
 func counterReducer(state: inout Int, action: CounterAction) {
