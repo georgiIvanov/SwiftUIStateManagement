@@ -6,31 +6,7 @@
 //
 
 import Foundation
-
-enum CounterAction {
-    case decrTapped
-    case incrTapped
-}
-
-enum PrimeModalAction {
-    case saveFavoritePrimeTapped
-    case removeFavoritePrimeTapped
-}
-
-enum FavoritePrimesAction {
-    case deleteFavoritePrimes(IndexSet)
-
-    var deleteFavoritePrimes: IndexSet? {
-        get {
-            guard case let .deleteFavoritePrimes(value) = self else { return nil }
-            return value
-        }
-        set {
-            guard case .deleteFavoritePrimes = self, let newValue = newValue else { return }
-            self = .deleteFavoritePrimes(newValue)
-        }
-    }
-}
+import Reducers
 
 // All the actions user can perform in the App
 enum AppAction {

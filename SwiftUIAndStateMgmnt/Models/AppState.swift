@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import Reducers
 
 struct AppState {
     var count = 0
@@ -41,6 +42,18 @@ extension AppState {
         set {
             favoritePrimes = newValue.favoritePrimes
             activityFeed = newValue.activityFeed
+        }
+    }
+    
+    var primeModal: PrimeModalState {
+        get {
+            return PrimeModalState(count: self.count,
+                                   favoritePrimes: self.favoritePrimes)
+        }
+        
+        set {
+            self.count = newValue.count
+            self.favoritePrimes = newValue.favoritePrimes
         }
     }
 }
