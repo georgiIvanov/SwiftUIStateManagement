@@ -8,6 +8,7 @@
 import Foundation
 import ComposableArchitecture
 import Reducers
+import FavoritePrimes
 
 func activityFeed(
     _ reducer: @escaping (inout AppState, AppAction) -> Void

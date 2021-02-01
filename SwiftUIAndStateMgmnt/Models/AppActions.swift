@@ -7,6 +7,7 @@
 
 import Foundation
 import Reducers
+import FavoritePrimes
 
 // All the actions user can perform in the App
 enum AppAction {
