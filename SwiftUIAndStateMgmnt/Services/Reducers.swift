@@ -10,6 +10,7 @@ import ComposableArchitecture
 import Reducers
 import FavoritePrimes
 import PrimeModal
+import Counter
 
 func activityFeed(
     _ reducer: @escaping (inout AppState, AppAction) -> Void

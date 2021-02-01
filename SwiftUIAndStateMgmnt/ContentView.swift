@@ -8,6 +8,7 @@
 import SwiftUI
 import ComposableArchitecture
 import FavoritePrimes
+import Counter
 
 struct ContentView: View {
     @ObservedObject var store: Store<AppState, AppAction>

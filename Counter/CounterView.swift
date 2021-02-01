@@ -8,7 +8,6 @@
 import SwiftUI
 import ComposableArchitecture
 import PrimeModal
-import Reducers
 
 private func ordinal(_ n: Int) -> String {
     let formatter = NumberFormatter()
@@ -23,21 +22,26 @@ struct PrimeAlert: Identifiable {
     }
 }
 
-struct CounterViewState {
+public struct CounterViewState {
     var count: Int
     var favoritePrimes: [Int]
     
     var primeModalViewState: PrimeModalViewState {
         PrimeModalViewState(count: count, favoritePrimes: favoritePrimes)
     }
+    
+    public init(count: Int, favoritePrimes: [Int]) {
+        self.count = count
+        self.favoritePrimes = favoritePrimes
+    }
 }
 
-enum CounterViewAction {
+public enum CounterViewAction {
     case counter(CounterAction)
     case primeModal(PrimeModalAction)
 }
 
-struct CounterView: View {
+public struct CounterView: View {
     
     @ObservedObject var store: Store<CounterViewState, CounterViewAction>
     @State var isPrimeModalShown = false
@@ -46,7 +50,11 @@ struct CounterView: View {
 
     let webRequests = WebRequestsService()
     
-    var body: some View {
+    public init(store: Store<CounterViewState, CounterViewAction>) {
+        self.store = store
+    }
+    
+    public var body: some View {
         VStack {
             HStack {
                 Button(action: { store.send(.counter(.decrTapped)) }) {

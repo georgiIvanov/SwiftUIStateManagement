@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 class WebRequestsService {
     
     private let wolframAlphaApiKey = "GK6WPH-LWEH8AXQU4"
