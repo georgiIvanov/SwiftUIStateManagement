@@ -33,4 +33,12 @@ public class Store<Value, Action>: ObservableObject {
         
         return localStore
     }
+    
+    public func view<LocalAction>(_ f: @escaping (LocalAction) -> Action) -> Store<Value, LocalAction> {
+        return Store<Value, LocalAction>(
+            initialValue: value) { (value, localAction) in
+            self.send(f(localAction))
+            value = self.value
+        }
+    }
 }
