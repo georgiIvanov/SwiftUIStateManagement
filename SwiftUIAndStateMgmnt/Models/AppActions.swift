@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Reducers
 import FavoritePrimes
 import PrimeModal
 import Counter

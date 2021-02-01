@@ -7,7 +7,6 @@
 
 import Foundation
 import ComposableArchitecture
-import Reducers
 import FavoritePrimes
 import PrimeModal
 import Counter

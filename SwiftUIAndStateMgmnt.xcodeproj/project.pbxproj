@@ -30,6 +30,7 @@
 		97375E1E25C8B716007E9AC5 /* CounterReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DD421725C764D10049FF78 /* CounterReducer.swift */; };
 		97375E4325C8B745007E9AC5 /* WebRequestsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973A52CD25BCD31C004BD18A /* WebRequestsService.swift */; };
 		97375E5025C8B77E007E9AC5 /* WolframAlphaResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 973A52C425BCD266004BD18A /* WolframAlphaResult.swift */; };
+		97375E8725C8B905007E9AC5 /* PrimeModal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97375D9C25C8AF77007E9AC5 /* PrimeModal.framework */; };
 		97754F4125BCB9190099EDDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97754F4025BCB9190099EDDC /* AppDelegate.swift */; };
 		97754F4325BCB9190099EDDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97754F4225BCB9190099EDDC /* SceneDelegate.swift */; };
 		97754F4525BCB9190099EDDC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97754F4425BCB9190099EDDC /* ContentView.swift */; };
@@ -42,11 +43,6 @@
 		9778CB0825BE0FC600E969CF /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB0725BE0FC600E969CF /* AppActions.swift */; };
 		9778CB1025BE28E400E969CF /* Reducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB0F25BE28E400E969CF /* Reducers.swift */; };
 		9778CB1525BE3E6000E969CF /* FavoritePrimesState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB1425BE3E6000E969CF /* FavoritePrimesState.swift */; };
-		97DD41B925C7604E0049FF78 /* Reducers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD41B025C7604E0049FF78 /* Reducers.framework */; };
-		97DD41C025C7604E0049FF78 /* ReducersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DD41BF25C7604E0049FF78 /* ReducersTests.swift */; };
-		97DD41C225C7604E0049FF78 /* Reducers.h in Headers */ = {isa = PBXBuildFile; fileRef = 97DD41B225C7604E0049FF78 /* Reducers.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		97DD41C525C7604E0049FF78 /* Reducers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD41B025C7604E0049FF78 /* Reducers.framework */; };
-		97DD41C625C7604E0049FF78 /* Reducers.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD41B025C7604E0049FF78 /* Reducers.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		97DD41E025C760AA0049FF78 /* ComposableArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD41D725C760AA0049FF78 /* ComposableArchitecture.framework */; };
 		97DD41E725C760AA0049FF78 /* ComposableArchitectureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DD41E625C760AA0049FF78 /* ComposableArchitectureTests.swift */; };
 		97DD41E925C760AA0049FF78 /* ComposableArchitecture.h in Headers */ = {isa = PBXBuildFile; fileRef = 97DD41D925C760AA0049FF78 /* ComposableArchitecture.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -134,27 +130,6 @@
 			remoteGlobalIDString = 97754F3C25BCB9190099EDDC;
 			remoteInfo = SwiftUIAndStateMgmnt;
 		};
-		97DD41BA25C7604E0049FF78 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 97754F3525BCB9190099EDDC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 97DD41AF25C7604E0049FF78;
-			remoteInfo = Reducers;
-		};
-		97DD41BC25C7604E0049FF78 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 97754F3525BCB9190099EDDC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 97754F3C25BCB9190099EDDC;
-			remoteInfo = SwiftUIAndStateMgmnt;
-		};
-		97DD41C325C7604E0049FF78 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 97754F3525BCB9190099EDDC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 97DD41AF25C7604E0049FF78;
-			remoteInfo = Reducers;
-		};
 		97DD41E125C760AA0049FF78 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 97754F3525BCB9190099EDDC /* Project object */;
@@ -187,7 +162,6 @@
 			files = (
 				97375DFE25C8B6FB007E9AC5 /* Counter.framework in Embed Frameworks */,
 				97DD41ED25C760AA0049FF78 /* ComposableArchitecture.framework in Embed Frameworks */,
-				97DD41C625C7604E0049FF78 /* Reducers.framework in Embed Frameworks */,
 				97375DB225C8AF77007E9AC5 /* PrimeModal.framework in Embed Frameworks */,
 				97375D5225C8A712007E9AC5 /* FavoritePrimes.framework in Embed Frameworks */,
 			);
@@ -240,12 +214,6 @@
 		9778CB0725BE0FC600E969CF /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		9778CB0F25BE28E400E969CF /* Reducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducers.swift; sourceTree = "<group>"; };
 		9778CB1425BE3E6000E969CF /* FavoritePrimesState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePrimesState.swift; sourceTree = "<group>"; };
-		97DD41B025C7604E0049FF78 /* Reducers.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Reducers.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		97DD41B225C7604E0049FF78 /* Reducers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reducers.h; sourceTree = "<group>"; };
-		97DD41B325C7604E0049FF78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		97DD41B825C7604E0049FF78 /* ReducersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReducersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		97DD41BF25C7604E0049FF78 /* ReducersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReducersTests.swift; sourceTree = "<group>"; };
-		97DD41C125C7604E0049FF78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97DD41D725C760AA0049FF78 /* ComposableArchitecture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ComposableArchitecture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		97DD41D925C760AA0049FF78 /* ComposableArchitecture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposableArchitecture.h; sourceTree = "<group>"; };
 		97DD41DA25C760AA0049FF78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -292,6 +260,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97375E8725C8B905007E9AC5 /* PrimeModal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,7 +278,6 @@
 			files = (
 				97375DFD25C8B6FB007E9AC5 /* Counter.framework in Frameworks */,
 				97DD41EC25C760AA0049FF78 /* ComposableArchitecture.framework in Frameworks */,
-				97DD41C525C7604E0049FF78 /* Reducers.framework in Frameworks */,
 				97375DB125C8AF77007E9AC5 /* PrimeModal.framework in Frameworks */,
 				97375D5125C8A712007E9AC5 /* FavoritePrimes.framework in Frameworks */,
 			);
@@ -326,21 +294,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		97DD41AD25C7604E0049FF78 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		97DD41B525C7604E0049FF78 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				97DD41B925C7604E0049FF78 /* Reducers.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +377,13 @@
 			path = CounterTests;
 			sourceTree = "<group>";
 		};
+		97375E8625C8B905007E9AC5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		973A52C325BCD248004BD18A /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,8 +408,6 @@
 				97754F3F25BCB9190099EDDC /* SwiftUIAndStateMgmnt */,
 				97754F5625BCB91B0099EDDC /* SwiftUIAndStateMgmntTests */,
 				97754F6125BCB91B0099EDDC /* SwiftUIAndStateMgmntUITests */,
-				97DD41B125C7604E0049FF78 /* Reducers */,
-				97DD41BE25C7604E0049FF78 /* ReducersTests */,
 				97DD41D825C760AA0049FF78 /* ComposableArchitecture */,
 				97DD41E525C760AA0049FF78 /* ComposableArchitectureTests */,
 				97375D3D25C8A712007E9AC5 /* FavoritePrimes */,
@@ -459,6 +417,7 @@
 				97375DE925C8B6FA007E9AC5 /* Counter */,
 				97375DF625C8B6FB007E9AC5 /* CounterTests */,
 				97754F3E25BCB9190099EDDC /* Products */,
+				97375E8625C8B905007E9AC5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -468,8 +427,6 @@
 				97754F3D25BCB9190099EDDC /* SwiftUIAndStateMgmnt.app */,
 				97754F5325BCB91B0099EDDC /* SwiftUIAndStateMgmntTests.xctest */,
 				97754F5E25BCB91B0099EDDC /* SwiftUIAndStateMgmntUITests.xctest */,
-				97DD41B025C7604E0049FF78 /* Reducers.framework */,
-				97DD41B825C7604E0049FF78 /* ReducersTests.xctest */,
 				97DD41D725C760AA0049FF78 /* ComposableArchitecture.framework */,
 				97DD41DF25C760AA0049FF78 /* ComposableArchitectureTests.xctest */,
 				97375D3C25C8A712007E9AC5 /* FavoritePrimes.framework */,
@@ -524,24 +481,6 @@
 			path = SwiftUIAndStateMgmntUITests;
 			sourceTree = "<group>";
 		};
-		97DD41B125C7604E0049FF78 /* Reducers */ = {
-			isa = PBXGroup;
-			children = (
-				97DD41B225C7604E0049FF78 /* Reducers.h */,
-				97DD41B325C7604E0049FF78 /* Info.plist */,
-			);
-			path = Reducers;
-			sourceTree = "<group>";
-		};
-		97DD41BE25C7604E0049FF78 /* ReducersTests */ = {
-			isa = PBXGroup;
-			children = (
-				97DD41BF25C7604E0049FF78 /* ReducersTests.swift */,
-				97DD41C125C7604E0049FF78 /* Info.plist */,
-			);
-			path = ReducersTests;
-			sourceTree = "<group>";
-		};
 		97DD41D825C760AA0049FF78 /* ComposableArchitecture */ = {
 			isa = PBXGroup;
 			children = (
@@ -586,14 +525,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				97375DFA25C8B6FB007E9AC5 /* Counter.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		97DD41AB25C7604E0049FF78 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				97DD41C225C7604E0049FF78 /* Reducers.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,7 +662,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				97DD41C425C7604E0049FF78 /* PBXTargetDependency */,
 				97DD41EB25C760AA0049FF78 /* PBXTargetDependency */,
 				97375D5025C8A712007E9AC5 /* PBXTargetDependency */,
 				97375DB025C8AF77007E9AC5 /* PBXTargetDependency */,
@@ -777,43 +707,6 @@
 			productName = SwiftUIAndStateMgmntUITests;
 			productReference = 97754F5E25BCB91B0099EDDC /* SwiftUIAndStateMgmntUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
-		};
-		97DD41AF25C7604E0049FF78 /* Reducers */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 97DD41CC25C7604E0049FF78 /* Build configuration list for PBXNativeTarget "Reducers" */;
-			buildPhases = (
-				97DD41AB25C7604E0049FF78 /* Headers */,
-				97DD41AC25C7604E0049FF78 /* Sources */,
-				97DD41AD25C7604E0049FF78 /* Frameworks */,
-				97DD41AE25C7604E0049FF78 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Reducers;
-			productName = Reducers;
-			productReference = 97DD41B025C7604E0049FF78 /* Reducers.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		97DD41B725C7604E0049FF78 /* ReducersTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 97DD41CD25C7604E0049FF78 /* Build configuration list for PBXNativeTarget "ReducersTests" */;
-			buildPhases = (
-				97DD41B425C7604E0049FF78 /* Sources */,
-				97DD41B525C7604E0049FF78 /* Frameworks */,
-				97DD41B625C7604E0049FF78 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				97DD41BB25C7604E0049FF78 /* PBXTargetDependency */,
-				97DD41BD25C7604E0049FF78 /* PBXTargetDependency */,
-			);
-			name = ReducersTests;
-			productName = ReducersTests;
-			productReference = 97DD41B825C7604E0049FF78 /* ReducersTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		97DD41D625C760AA0049FF78 /* ComposableArchitecture */ = {
 			isa = PBXNativeTarget;
@@ -893,14 +786,6 @@
 						CreatedOnToolsVersion = 12.3;
 						TestTargetID = 97754F3C25BCB9190099EDDC;
 					};
-					97DD41AF25C7604E0049FF78 = {
-						CreatedOnToolsVersion = 12.3;
-						LastSwiftMigration = 1230;
-					};
-					97DD41B725C7604E0049FF78 = {
-						CreatedOnToolsVersion = 12.3;
-						TestTargetID = 97754F3C25BCB9190099EDDC;
-					};
 					97DD41D625C760AA0049FF78 = {
 						CreatedOnToolsVersion = 12.3;
 					};
@@ -926,8 +811,6 @@
 				97754F3C25BCB9190099EDDC /* SwiftUIAndStateMgmnt */,
 				97754F5225BCB91B0099EDDC /* SwiftUIAndStateMgmntTests */,
 				97754F5D25BCB91B0099EDDC /* SwiftUIAndStateMgmntUITests */,
-				97DD41AF25C7604E0049FF78 /* Reducers */,
-				97DD41B725C7604E0049FF78 /* ReducersTests */,
 				97DD41D625C760AA0049FF78 /* ComposableArchitecture */,
 				97DD41DE25C760AA0049FF78 /* ComposableArchitectureTests */,
 				97375D3B25C8A712007E9AC5 /* FavoritePrimes */,
@@ -1001,20 +884,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		97754F5C25BCB91B0099EDDC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		97DD41AE25C7604E0049FF78 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		97DD41B625C7604E0049FF78 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1121,21 +990,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		97DD41AC25C7604E0049FF78 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		97DD41B425C7604E0049FF78 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				97DD41C025C7604E0049FF78 /* ReducersTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		97DD41D325C760AA0049FF78 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1210,21 +1064,6 @@
 			isa = PBXTargetDependency;
 			target = 97754F3C25BCB9190099EDDC /* SwiftUIAndStateMgmnt */;
 			targetProxy = 97754F5F25BCB91B0099EDDC /* PBXContainerItemProxy */;
-		};
-		97DD41BB25C7604E0049FF78 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 97DD41AF25C7604E0049FF78 /* Reducers */;
-			targetProxy = 97DD41BA25C7604E0049FF78 /* PBXContainerItemProxy */;
-		};
-		97DD41BD25C7604E0049FF78 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 97754F3C25BCB9190099EDDC /* SwiftUIAndStateMgmnt */;
-			targetProxy = 97DD41BC25C7604E0049FF78 /* PBXContainerItemProxy */;
-		};
-		97DD41C425C7604E0049FF78 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 97DD41AF25C7604E0049FF78 /* Reducers */;
-			targetProxy = 97DD41C325C7604E0049FF78 /* PBXContainerItemProxy */;
 		};
 		97DD41E225C760AA0049FF78 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1771,99 +1610,6 @@
 			};
 			name = Release;
 		};
-		97DD41C825C7604E0049FF78 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 4F25V2B22S;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Reducers/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.georgiivanov.Reducers;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		97DD41C925C7604E0049FF78 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 4F25V2B22S;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Reducers/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.georgiivanov.Reducers;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		97DD41CA25C7604E0049FF78 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ReducersTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.georgiivanov.ReducersTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUIAndStateMgmnt.app/SwiftUIAndStateMgmnt";
-			};
-			name = Debug;
-		};
-		97DD41CB25C7604E0049FF78 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ReducersTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.georgiivanov.ReducersTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUIAndStateMgmnt.app/SwiftUIAndStateMgmnt";
-			};
-			name = Release;
-		};
 		97DD41EF25C760AA0049FF78 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2045,24 +1791,6 @@
 			buildConfigurations = (
 				97754F6E25BCB91B0099EDDC /* Debug */,
 				97754F6F25BCB91B0099EDDC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		97DD41CC25C7604E0049FF78 /* Build configuration list for PBXNativeTarget "Reducers" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				97DD41C825C7604E0049FF78 /* Debug */,
-				97DD41C925C7604E0049FF78 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		97DD41CD25C7604E0049FF78 /* Build configuration list for PBXNativeTarget "ReducersTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				97DD41CA25C7604E0049FF78 /* Debug */,
-				97DD41CB25C7604E0049FF78 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
