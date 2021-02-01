@@ -17,8 +17,13 @@ private func isPrime (_ p: Int) -> Bool {
   return true
 }
 
+struct IsPrimeModalViewState {
+    var count: Int
+    var favoritePrimes:  [Int]
+}
+
 struct IsPrimeModalView: View {
-    @ObservedObject var store: Store<AppState, AppAction>
+    @ObservedObject var store: Store<IsPrimeModalViewState, AppAction>
     
     var body: some View {
         VStack {
@@ -47,6 +52,8 @@ struct IsPrimeModalView: View {
 
 struct IsPrimeModalView_Previews: PreviewProvider {
     static var previews: some View {
-        IsPrimeModalView(store: Store(initialValue: AppState(), reducer: createAppReducer()))
+        IsPrimeModalView(store: Store(initialValue: AppState(), reducer: createAppReducer()).view {
+            IsPrimeModalViewState(count: $0.count, favoritePrimes: $0.favoritePrimes)
+        })
     }
 }

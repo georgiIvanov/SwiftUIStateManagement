@@ -21,9 +21,18 @@ struct PrimeAlert: Identifiable {
     }
 }
 
+struct CounterViewState {
+    var count: Int
+    var favoritePrimes: [Int]
+    
+    var isPrimeModalViewState: IsPrimeModalViewState {
+        IsPrimeModalViewState(count: count, favoritePrimes: favoritePrimes)
+    }
+}
+
 struct CounterView: View {
     
-    @ObservedObject var store: Store<AppState, AppAction>
+    @ObservedObject var store: Store<CounterViewState, AppAction>
     @State var isPrimeModalShown = false
     @State var alertNthPrime: PrimeAlert?
     @State var isNthPrimeButtonDisabled = false
@@ -58,7 +67,7 @@ struct CounterView: View {
                   dismissButton: .default(Text("Ok")))
         })
         .sheet(isPresented: self.$isPrimeModalShown) {
-            IsPrimeModalView(store: store)
+            IsPrimeModalView(store: store.view { $0.isPrimeModalViewState })
         }
         
     }
