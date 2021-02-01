@@ -8,6 +8,7 @@
 import SwiftUI
 import ComposableArchitecture
 import PrimeModal
+import Reducers
 
 private func ordinal(_ n: Int) -> String {
     let formatter = NumberFormatter()
@@ -31,9 +32,14 @@ struct CounterViewState {
     }
 }
 
+enum CounterViewAction {
+    case counter(CounterAction)
+    case primeModal(PrimeModalAction)
+}
+
 struct CounterView: View {
     
-    @ObservedObject var store: Store<CounterViewState, AppAction>
+    @ObservedObject var store: Store<CounterViewState, CounterViewAction>
     @State var isPrimeModalShown = false
     @State var alertNthPrime: PrimeAlert?
     @State var isNthPrimeButtonDisabled = false

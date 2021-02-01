@@ -17,7 +17,14 @@ struct ContentView: View {
             List {
                 NavigationLink(destination: CounterView(
                     store: store.view(value: { CounterViewState(count: $0.count, favoritePrimes: $0.favoritePrimes) },
-                                      action: { $0 })
+                                      action: {
+                                        switch $0 {
+                                        case let .counter(action):
+                                            return AppAction.counter(action)
+                                        case let .primeModal(action):
+                                            return AppAction.primeModal(action)
+                                        }
+                                      })
                 )) {
                     Text("Counter demo")
                 }
