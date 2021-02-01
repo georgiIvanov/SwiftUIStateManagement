@@ -17,27 +17,36 @@ private func isPrime (_ p: Int) -> Bool {
   return true
 }
 
-struct IsPrimeModalViewState {
-    var count: Int
-    var favoritePrimes:  [Int]
+public struct PrimeModalViewState {
+    public var count: Int
+    public var favoritePrimes:  [Int]
+    
+    public init(count: Int, favoritePrimes:  [Int]) {
+        self.count = count
+        self.favoritePrimes = favoritePrimes
+    }
 }
 
-struct IsPrimeModalView: View {
-    @ObservedObject var store: Store<IsPrimeModalViewState, AppAction>
+public struct IsPrimeModalView: View {
+    @ObservedObject var store: Store<PrimeModalViewState, PrimeModalAction>
     
-    var body: some View {
+    public init(store: Store<PrimeModalViewState, PrimeModalAction>) {
+        self.store = store
+    }
+    
+    public var body: some View {
         VStack {
             if isPrime(store.value.count) {
                 Text("\(store.value.count) is prime 🎉")
                 if store.value.favoritePrimes.contains(store.value.count) {
                     Button(action: {
-                        store.send(.primeModal(.removeFavoritePrimeTapped))
+                        store.send(.removeFavoritePrimeTapped)
                     }, label: {
                         Text("Remove from favorite primes.")
                     })
                 } else {
                     Button(action: {
-                        store.send(.primeModal(.saveFavoritePrimeTapped))
+                        store.send(.saveFavoritePrimeTapped)
                     }, label: {
                         Text("Save to favorite primes.")
                     })
@@ -52,8 +61,8 @@ struct IsPrimeModalView: View {
 
 struct IsPrimeModalView_Previews: PreviewProvider {
     static var previews: some View {
-        IsPrimeModalView(store: Store(initialValue: AppState(), reducer: createAppReducer()).view (value: {
-            IsPrimeModalViewState(count: $0.count, favoritePrimes: $0.favoritePrimes)
-        }, action: { $0 }))
+        IsPrimeModalView(store: Store(
+                            initialValue: PrimeModalViewState(count: 0, favoritePrimes: []),
+                            reducer: primeModalReducer))
     }
 }

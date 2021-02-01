@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import Reducers
+import PrimeModal
 
 struct AppState {
     var count = 0
@@ -45,10 +46,10 @@ extension AppState {
         }
     }
     
-    var primeModal: PrimeModalState {
+    var primeModal: PrimeModalViewState {
         get {
-            return PrimeModalState(count: self.count,
-                                   favoritePrimes: self.favoritePrimes)
+            return PrimeModalViewState(count: self.count,
+                                       favoritePrimes: self.favoritePrimes)
         }
         
         set {

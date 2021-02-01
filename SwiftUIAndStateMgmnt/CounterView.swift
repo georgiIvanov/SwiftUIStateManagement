@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ComposableArchitecture
+import PrimeModal
 
 private func ordinal(_ n: Int) -> String {
     let formatter = NumberFormatter()
@@ -25,8 +26,8 @@ struct CounterViewState {
     var count: Int
     var favoritePrimes: [Int]
     
-    var isPrimeModalViewState: IsPrimeModalViewState {
-        IsPrimeModalViewState(count: count, favoritePrimes: favoritePrimes)
+    var primeModalViewState: PrimeModalViewState {
+        PrimeModalViewState(count: count, favoritePrimes: favoritePrimes)
     }
 }
 
@@ -67,8 +68,8 @@ struct CounterView: View {
                   dismissButton: .default(Text("Ok")))
         })
         .sheet(isPresented: self.$isPrimeModalShown) {
-            IsPrimeModalView(store: store.view(value: { $0.isPrimeModalViewState },
-                                               action: { $0 }))
+            IsPrimeModalView(store: store.view(value: { $0.primeModalViewState },
+                                               action: { .primeModal($0) }))
         }
         
     }

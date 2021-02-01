@@ -9,6 +9,7 @@ import Foundation
 import ComposableArchitecture
 import Reducers
 import FavoritePrimes
+import PrimeModal
 
 func activityFeed(
     _ reducer: @escaping (inout AppState, AppAction) -> Void
