@@ -67,7 +67,8 @@ struct CounterView: View {
                   dismissButton: .default(Text("Ok")))
         })
         .sheet(isPresented: self.$isPrimeModalShown) {
-            IsPrimeModalView(store: store.view { $0.isPrimeModalViewState })
+            IsPrimeModalView(store: store.view(value: { $0.isPrimeModalViewState },
+                                               action: { $0 }))
         }
         
     }

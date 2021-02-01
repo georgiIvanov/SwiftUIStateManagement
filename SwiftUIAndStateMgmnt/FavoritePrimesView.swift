@@ -7,9 +7,10 @@
 
 import SwiftUI
 import ComposableArchitecture
+import Reducers
 
 struct FavoritePrimesView: View {
-    @ObservedObject var store: Store<[Int], AppAction>
+    @ObservedObject var store: Store<[Int], FavoritePrimesAction>
     
     
     var body: some View {
@@ -18,7 +19,7 @@ struct FavoritePrimesView: View {
                 Text("\(prime)")
             }
             .onDelete(perform: { indexSet in
-                store.send(.favoritePrimes(.deleteFavoritePrimes(indexSet)))
+                store.send(.deleteFavoritePrimes(indexSet))
             })
         }
             .navigationBarTitle("Favorite Primes")
@@ -27,6 +28,8 @@ struct FavoritePrimesView: View {
 
 struct FavoritePrimesView_Previews: PreviewProvider {
     static var previews: some View {
-        FavoritePrimesView(store: Store(initialValue: AppState(), reducer: createAppReducer()).view { $0.favoritePrimes })
+        FavoritePrimesView(store: Store(initialValue: AppState(),
+                                        reducer: createAppReducer()).view (value: { $0.favoritePrimes },
+                                                                           action: { .favoritePrimes($0) }))
     }
 }

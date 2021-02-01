@@ -15,11 +15,14 @@ struct ContentView: View {
         NavigationView {
             List {
                 NavigationLink(destination: CounterView(
-                    store: store.view { CounterViewState(count: $0.count, favoritePrimes: $0.favoritePrimes) }
+                    store: store.view(value: { CounterViewState(count: $0.count, favoritePrimes: $0.favoritePrimes) },
+                                      action: { $0 })
                 )) {
                     Text("Counter demo")
                 }
-                NavigationLink(destination: FavoritePrimesView(store: store.view { $0.favoritePrimes })) {
+                NavigationLink(destination: FavoritePrimesView(store: store.view(value: { $0.favoritePrimes },
+                                                                                 action: { .favoritePrimes($0) }))
+                ) {
                     Text("Favorite primes")
                 }
             }
