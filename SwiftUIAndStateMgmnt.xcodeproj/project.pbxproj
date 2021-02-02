@@ -191,6 +191,7 @@
 		97375DF025C8B6FB007E9AC5 /* CounterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CounterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		97375DF725C8B6FB007E9AC5 /* CounterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterTests.swift; sourceTree = "<group>"; };
 		97375DF925C8B6FB007E9AC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		97375EB025C8BF65007E9AC5 /* PrimeTime.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = PrimeTime.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		973A52BE25BCCB50004BD18A /* IsPrimeModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsPrimeModalView.swift; sourceTree = "<group>"; };
 		973A52C425BCD266004BD18A /* WolframAlphaResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WolframAlphaResult.swift; sourceTree = "<group>"; };
 		973A52CD25BCD31C004BD18A /* WebRequestsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRequestsService.swift; sourceTree = "<group>"; };
@@ -405,6 +406,7 @@
 		97754F3425BCB9190099EDDC = {
 			isa = PBXGroup;
 			children = (
+				97375EB025C8BF65007E9AC5 /* PrimeTime.playground */,
 				97754F3F25BCB9190099EDDC /* SwiftUIAndStateMgmnt */,
 				97754F5625BCB91B0099EDDC /* SwiftUIAndStateMgmntTests */,
 				97754F6125BCB91B0099EDDC /* SwiftUIAndStateMgmntUITests */,

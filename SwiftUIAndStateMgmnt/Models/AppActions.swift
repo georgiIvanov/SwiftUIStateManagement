@@ -7,7 +7,6 @@
 
 import Foundation
 import FavoritePrimes
-import PrimeModal
 import Counter
 
 // All the actions user can perform in the App

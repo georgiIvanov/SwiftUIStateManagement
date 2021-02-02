@@ -8,7 +8,6 @@
 import Foundation
 import ComposableArchitecture
 import FavoritePrimes
-import PrimeModal
 import Counter
 
 func activityFeed(
