@@ -12,31 +12,8 @@ import Counter
 
 // All the actions user can perform in the App
 enum AppAction {
-    case counter(CounterAction)
-    case primeModal(PrimeModalAction)
+    case counterView(CounterViewAction)
     case favoritePrimes(FavoritePrimesAction)
-
-    var counter: CounterAction? {
-        get {
-            guard case let .counter(value) = self else { return nil }
-            return value
-        }
-        set {
-            guard case .counter = self, let newValue = newValue else { return }
-            self = .counter(newValue)
-        }
-    }
-
-    var primeModal: PrimeModalAction? {
-        get {
-            guard case let .primeModal(value) = self else { return nil }
-            return value
-        }
-        set {
-            guard case .primeModal = self, let newValue = newValue else { return }
-            self = .primeModal(newValue)
-        }
-    }
 
     var favoritePrimes: FavoritePrimesAction? {
         get {
@@ -46,6 +23,17 @@ enum AppAction {
         set {
             guard case .favoritePrimes = self, let newValue = newValue else { return }
             self = .favoritePrimes(newValue)
+        }
+    }
+    
+    var counterView: CounterViewAction? {
+        get {
+            guard case let .counterView(value) = self else { return nil }
+            return value
+        }
+        set {
+            guard case .counterView = self, let newValue = newValue else { return }
+            self = .counterView(newValue)
         }
     }
 }

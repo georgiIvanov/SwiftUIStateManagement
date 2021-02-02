@@ -23,11 +23,18 @@ struct PrimeAlert: Identifiable {
 }
 
 public struct CounterViewState {
-    var count: Int
-    var favoritePrimes: [Int]
+    public var count: Int
+    public var favoritePrimes: [Int]
     
-    var primeModalViewState: PrimeModalViewState {
-        PrimeModalViewState(count: count, favoritePrimes: favoritePrimes)
+    public var primeModalViewState: PrimeModalViewState {
+        get {
+            PrimeModalViewState(count: count, favoritePrimes: favoritePrimes)
+        }
+        
+        set {
+            count = newValue.count
+            favoritePrimes = newValue.favoritePrimes
+        }
     }
     
     public init(count: Int, favoritePrimes: [Int]) {
@@ -39,6 +46,28 @@ public struct CounterViewState {
 public enum CounterViewAction {
     case counter(CounterAction)
     case primeModal(PrimeModalAction)
+    
+    public var counter: CounterAction? {
+        get {
+            guard case let .counter(value) = self else { return nil }
+            return value
+        }
+        set {
+            guard case .counter = self, let newValue = newValue else { return }
+            self = .counter(newValue)
+        }
+    }
+
+    public var primeModal: PrimeModalAction? {
+        get {
+            guard case let .primeModal(value) = self else { return nil }
+            return value
+        }
+        set {
+            guard case .primeModal = self, let newValue = newValue else { return }
+            self = .primeModal(newValue)
+        }
+    }
 }
 
 public struct CounterView: View {

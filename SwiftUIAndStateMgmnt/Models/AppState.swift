@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import PrimeModal
+import Counter
 
 struct AppState {
     var count = 0
@@ -45,10 +46,10 @@ extension AppState {
         }
     }
     
-    var primeModal: PrimeModalViewState {
+    var counterView: CounterViewState {
         get {
-            return PrimeModalViewState(count: self.count,
-                                       favoritePrimes: self.favoritePrimes)
+            return CounterViewState(count: self.count,
+                                    favoritePrimes: self.favoritePrimes)
         }
         
         set {
