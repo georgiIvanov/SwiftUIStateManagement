@@ -28,12 +28,3 @@ PlaygroundPage.current.liveView = UIHostingController(
 //        )
 //    )
 //)
-
-//PlaygroundPage.current.liveView = UIHostingController(
-//    rootView: FavoritePrimesView(
-//        store: Store<[Int], FavoritePrimesAction>(
-//            initialValue: [2, 3, 11],
-//            reducer: favoritePrimesReducer
-//        )
-//    )
-//)
