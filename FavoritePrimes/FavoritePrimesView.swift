@@ -12,6 +12,7 @@ import ComposableArchitecture
 
 public enum FavoritePrimesAction {
     case deleteFavoritePrimes(IndexSet)
+    case loadedFavoritePrimes([Int])
 
     var deleteFavoritePrimes: IndexSet? {
         get {
@@ -41,6 +42,31 @@ public struct FavoritePrimesView: View {
                 store.send(.deleteFavoritePrimes(indexSet))
             })
         }
-            .navigationBarTitle("Favorite Primes")
+        .navigationBarTitle("Favorite Primes")
+        .navigationBarItems(
+            trailing: HStack {
+                Button("Save") {
+                    let data = try! JSONEncoder().encode(store.value)
+                    try! data.write(to: getFavoritePrimesUrl())
+                }
+                Button("Load") {
+                    guard let data = try? Data(contentsOf: getFavoritePrimesUrl()),
+                          let favoritePrimes = try? JSONDecoder().decode([Int].self, from: data) else {
+                        return
+                    }
+                    
+                    store.send(.loadedFavoritePrimes(favoritePrimes ))
+                }
+        })
     }
+}
+
+func getFavoritePrimesUrl() -> URL {
+    let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,
+                                                           .userDomainMask,
+                                                           true)[0]
+    
+    let documentsUrl = URL(fileURLWithPath: documentPath)
+    let favoritePrimesUrl = documentsUrl.appendingPathComponent("favoritePrimes.json")
+    return favoritePrimesUrl
 }

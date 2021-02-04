@@ -21,7 +21,7 @@ public class Store<Value, Action>: ObservableObject {
         reducer(&value, action)
     }
     
-    public func view<LocalValue, LocalAction >(value toLocalValue: @escaping (Value) -> LocalValue,
+    public func view<LocalValue, LocalAction>(value toLocalValue: @escaping (Value) -> LocalValue,
                                                action toGlobalAction: @escaping (LocalAction) -> Action
                                                ) -> Store<LocalValue, LocalAction> {
         let localStore = Store<LocalValue, LocalAction>(

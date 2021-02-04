@@ -9,9 +9,11 @@ import Foundation
 
 public func favoritePrimesReducer(state: inout [Int], action: FavoritePrimesAction) {
     switch action {
-    case .deleteFavoritePrimes(let indexSet):
+    case let .deleteFavoritePrimes(indexSet):
         for index in indexSet {
             state.remove(at: index)
         }
+    case let .loadedFavoritePrimes(favoritePrimes):
+        state = favoritePrimes
     }
 }
