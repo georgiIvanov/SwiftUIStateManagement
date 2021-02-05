@@ -15,5 +15,20 @@ public func favoritePrimesReducer(state: inout [Int], action: FavoritePrimesActi
         }
     case let .loadedFavoritePrimes(favoritePrimes):
         state = favoritePrimes
+    case .saveButtonTapped:
+        let data = try! JSONEncoder().encode(state)
+        try! data.write(to: getFavoritePrimesUrl())
     }
+    
+    
+}
+
+func getFavoritePrimesUrl() -> URL {
+    let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,
+                                                           .userDomainMask,
+                                                           true)[0]
+    
+    let documentsUrl = URL(fileURLWithPath: documentPath)
+    let favoritePrimesUrl = documentsUrl.appendingPathComponent("favoritePrimes.json")
+    return favoritePrimesUrl
 }
