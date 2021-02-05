@@ -8,37 +8,44 @@
 import Foundation
 
 public func combine<Value, Action>(
-    _ reducers: (inout Value, Action) -> Void...
-) -> (inout Value, Action) -> Void {
+    _ reducers: Reducer<Value, Action>...
+) -> Reducer<Value, Action> {
     return { value, action in
-        for reducer in reducers {
-            reducer(&value, action)
+        let effects = reducers.map { $0(&value, action) }
+        return {
+            for effect in effects {
+                effect()
+            }
         }
     }
 }
 
 public func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction>(
-    _ reducer: @escaping (inout LocalValue, LocalAction) -> Void,
+    _ reducer: @escaping Reducer<LocalValue, LocalAction>,
     value: WritableKeyPath<GlobalValue, LocalValue>,
     action: WritableKeyPath<GlobalAction, LocalAction?>
-) -> (inout GlobalValue, GlobalAction) -> Void {
+) -> Reducer<GlobalValue, GlobalAction> {
     return { globalValue, globalAction in
         guard let localAction = globalAction[keyPath: action] else {
-            return
+            return {}
         }
         
-        reducer(&globalValue[keyPath: value], localAction)
+        return reducer(&globalValue[keyPath: value], localAction)
     }
 }
 
 public func logging<Value, Action>(
-    _ reducer: @escaping (inout Value, Action) -> Void
-) -> (inout Value, Action) -> Void {
+    _ reducer: @escaping Reducer<Value, Action>
+) -> Reducer<Value, Action> {
     return { value, action in
-        reducer(&value, action)
-        print("Action: \(action)")
-        print("Value:")
-        dump(value)
-        print("---\n")
+        let effect = reducer(&value, action)
+        let valueCopy = value
+        return {
+            print("Action: \(action)")
+            print("Value:")
+            dump(valueCopy)
+            print("---\n")
+            effect()
+        }
     }
 }

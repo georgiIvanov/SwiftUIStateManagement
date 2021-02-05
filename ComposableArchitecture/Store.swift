@@ -7,18 +7,23 @@
 
 import Combine
 
+public typealias Effect = () -> Void
+
+public typealias Reducer<Value, Action> = (inout Value, Action) -> Effect
+
 public class Store<Value, Action>: ObservableObject {
-    private let reducer: (inout Value, Action) -> Void
+    private let reducer: Reducer<Value, Action>
     @Published public private(set) var value: Value
     private var storeUpdates: Cancellable?
     
-    public init(initialValue: Value, reducer: @escaping (inout Value, Action) -> Void) {
+    public init(initialValue: Value, reducer: @escaping Reducer<Value, Action>) {
         self.reducer = reducer
         self.value = initialValue
     }
     
     public func send(_ action: Action) {
-        reducer(&value, action)
+        let effect = reducer(&value, action)
+        effect()
     }
     
     public func view<LocalValue, LocalAction>(value toLocalValue: @escaping (Value) -> LocalValue,
@@ -28,6 +33,7 @@ public class Store<Value, Action>: ObservableObject {
             initialValue: toLocalValue(value)) { (localValue, localAction) in
             self.send(toGlobalAction(localAction))
             localValue = toLocalValue(self.value)
+            return {}
         }
         
         localStore.storeUpdates = $value.sink { [weak localStore] (newValue) in
