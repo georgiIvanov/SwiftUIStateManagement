@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ComposableArchitecture
 
 public enum PrimeModalAction {
     case saveFavoritePrimeTapped
@@ -13,11 +14,13 @@ public enum PrimeModalAction {
 }
 
 
-public func primeModalReducer(state: inout PrimeModalViewState, action: PrimeModalAction) {
+public func primeModalReducer(state: inout PrimeModalViewState, action: PrimeModalAction) -> [Effect<PrimeModalAction>] {
     switch action {
     case .saveFavoritePrimeTapped:
         state.favoritePrimes.append(state.count)
     case .removeFavoritePrimeTapped:
         state.favoritePrimes.removeAll { $0 == state.count }
     }
+    
+    return []
 }

@@ -2,6 +2,7 @@
 <playground version='6.0' target-platform='ios' buildActiveScheme='true'>
     <pages>
         <page name='FavoritePrimes'/>
-        <page name='OtherViews'/>
+        <page name='IsPrimeModal'/>
+        <page name='Counter'/>
     </pages>
 </playground>

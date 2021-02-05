@@ -14,16 +14,18 @@ public enum CounterAction {
     case incrTapped
 }
 
-public let counterViewReducer: (inout CounterViewState, CounterViewAction) -> Void = combine(
+public let counterViewReducer: (inout CounterViewState, CounterViewAction) -> [Effect<CounterViewAction>] = combine(
     pullback(counterReducer, value: \CounterViewState.count, action: \CounterViewAction.counter),
     pullback(primeModalReducer, value: \.primeModalViewState, action: \.primeModal)
 )
 
-public func counterReducer(state: inout Int, action: CounterAction) {
+public func counterReducer(state: inout Int, action: CounterAction) -> [Effect<CounterAction>] {
     switch action {
     case .decrTapped:
         state -= 1
     case .incrTapped:
         state += 1
     }
+    
+    return []
 }
