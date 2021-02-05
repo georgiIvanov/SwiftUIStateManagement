@@ -8,28 +8,43 @@
 import Foundation
 import ComposableArchitecture
 
-public func favoritePrimesReducer(state: inout [Int], action: FavoritePrimesAction) -> Effect {
+public func favoritePrimesReducer(state: inout [Int], action: FavoritePrimesAction) -> [Effect<FavoritePrimesAction>] {
     switch action {
     case let .deleteFavoritePrimes(indexSet):
         for index in indexSet {
             state.remove(at: index)
         }
-        return {}
+        return []
     case let .loadedFavoritePrimes(favoritePrimes):
         state = favoritePrimes
-        return {}
+        return []
     case .saveButtonTapped:
-        let state = state
-        return {
-            let data = try! JSONEncoder().encode(state)
-            try! data.write(to: getFavoritePrimesUrl())
-        }
+        return [saveEffect(favoritePrimes: state)]
+    case .loadButtonTapped:
+        return [loadEffect()]
     }
-    
-    
 }
 
-func getFavoritePrimesUrl() -> URL {
+private func loadEffect() -> Effect<FavoritePrimesAction> {
+    return {
+        guard let data = try? Data(contentsOf: getFavoritePrimesUrl()),
+              let favoritePrimes = try? JSONDecoder().decode([Int].self, from: data) else {
+            return nil
+        }
+        
+        return .loadedFavoritePrimes(favoritePrimes)
+    }
+}
+
+private func saveEffect(favoritePrimes: [Int]) -> Effect<FavoritePrimesAction> {
+    return {
+        let data = try! JSONEncoder().encode(favoritePrimes)
+        try! data.write(to: getFavoritePrimesUrl())
+        return nil
+    }
+}
+
+private func getFavoritePrimesUrl() -> URL {
     let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,
                                                            .userDomainMask,
                                                            true)[0]

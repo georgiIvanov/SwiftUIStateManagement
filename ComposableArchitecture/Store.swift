@@ -7,9 +7,9 @@
 
 import Combine
 
-public typealias Effect = () -> Void
+public typealias Effect<Action> = () -> Action?
 
-public typealias Reducer<Value, Action> = (inout Value, Action) -> Effect
+public typealias Reducer<Value, Action> = (inout Value, Action) -> [Effect<Action>]
 
 public class Store<Value, Action>: ObservableObject {
     private let reducer: Reducer<Value, Action>
@@ -22,8 +22,12 @@ public class Store<Value, Action>: ObservableObject {
     }
     
     public func send(_ action: Action) {
-        let effect = reducer(&value, action)
-        effect()
+        let effects = reducer(&value, action)
+        effects.forEach { effect in
+            if let action = effect() {
+                send(action)
+            }
+        }
     }
     
     public func view<LocalValue, LocalAction>(value toLocalValue: @escaping (Value) -> LocalValue,
@@ -33,7 +37,7 @@ public class Store<Value, Action>: ObservableObject {
             initialValue: toLocalValue(value)) { (localValue, localAction) in
             self.send(toGlobalAction(localAction))
             localValue = toLocalValue(self.value)
-            return {}
+            return []
         }
         
         localStore.storeUpdates = $value.sink { [weak localStore] (newValue) in

@@ -11,12 +11,8 @@ public func combine<Value, Action>(
     _ reducers: Reducer<Value, Action>...
 ) -> Reducer<Value, Action> {
     return { value, action in
-        let effects = reducers.map { $0(&value, action) }
-        return {
-            for effect in effects {
-                effect()
-            }
-        }
+        let effects = reducers.flatMap { $0(&value, action) }
+        return effects
     }
 }
 
@@ -27,10 +23,21 @@ public func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction>(
 ) -> Reducer<GlobalValue, GlobalAction> {
     return { globalValue, globalAction in
         guard let localAction = globalAction[keyPath: action] else {
-            return {}
+            return []
         }
         
-        return reducer(&globalValue[keyPath: value], localAction)
+        let localEffects = reducer(&globalValue[keyPath: value], localAction)
+        return localEffects.map { localEffect in
+            { () -> GlobalAction? in
+                guard let localAction = localEffect() else {
+                    return nil
+                }
+                
+                var globalAction = globalAction
+                globalAction[keyPath: action] = localAction
+                return globalAction
+            }
+        }
     }
 }
 
@@ -38,14 +45,14 @@ public func logging<Value, Action>(
     _ reducer: @escaping Reducer<Value, Action>
 ) -> Reducer<Value, Action> {
     return { value, action in
-        let effect = reducer(&value, action)
+        let effects = reducer(&value, action)
         let valueCopy = value
-        return {
+        return [{
             print("Action: \(action)")
             print("Value:")
             dump(valueCopy)
             print("---\n")
-            effect()
-        }
+            return nil
+        }] + effects
     }
 }

@@ -14,6 +14,7 @@ public enum FavoritePrimesAction {
     case deleteFavoritePrimes(IndexSet)
     case loadedFavoritePrimes([Int])
     case saveButtonTapped
+    case loadButtonTapped
 
     var deleteFavoritePrimes: IndexSet? {
         get {
@@ -50,12 +51,7 @@ public struct FavoritePrimesView: View {
                     store.send(.saveButtonTapped)
                 }
                 Button("Load") {
-                    guard let data = try? Data(contentsOf: getFavoritePrimesUrl()),
-                          let favoritePrimes = try? JSONDecoder().decode([Int].self, from: data) else {
-                        return
-                    }
-                    
-                    store.send(.loadedFavoritePrimes(favoritePrimes ))
+                    store.send(.loadButtonTapped)
                 }
         })
     }
