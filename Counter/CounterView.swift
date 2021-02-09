@@ -9,22 +9,34 @@ import SwiftUI
 import ComposableArchitecture
 import PrimeModal
 
-private func ordinal(_ n: Int) -> String {
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .ordinal
-    return formatter.string(for: n) ?? ""
-}
-
-struct PrimeAlert: Identifiable {
+public struct PrimeAlert: Identifiable {
     let prime: Int
-    var id: Int {
+    public var id: Int {
         self.prime
     }
 }
 
+public typealias CounterState = (
+    alertNthPrime: PrimeAlert?,
+    count: Int,
+    isNthPrimeButtonDisabled: Bool
+)
+
 public struct CounterViewState {
-    public var count: Int
-    public var favoritePrimes: [Int]
+    var count: Int
+    var favoritePrimes: [Int]
+    var alertNthPrime: PrimeAlert?
+    var isNthPrimeButtonDisabled: Bool = false
+    
+    public var counter: CounterState {
+        get {
+            return (alertNthPrime, count, isNthPrimeButtonDisabled)
+        }
+        
+        set {
+            (alertNthPrime, count, isNthPrimeButtonDisabled) = newValue
+        }
+    }
     
     public var primeModalViewState: PrimeModalViewState {
         get {
@@ -37,9 +49,11 @@ public struct CounterViewState {
         }
     }
     
-    public init(count: Int, favoritePrimes: [Int]) {
+    public init(count: Int, favoritePrimes: [Int], alertNthPrime: PrimeAlert?, isNthPrimeButtonDisabled: Bool) {
         self.count = count
         self.favoritePrimes = favoritePrimes
+        self.alertNthPrime = alertNthPrime
+        self.isNthPrimeButtonDisabled = isNthPrimeButtonDisabled
     }
 }
 
@@ -74,10 +88,6 @@ public struct CounterView: View {
     
     @ObservedObject var store: Store<CounterViewState, CounterViewAction>
     @State var isPrimeModalShown = false
-    @State var alertNthPrime: PrimeAlert?
-    @State var isNthPrimeButtonDisabled = false
-
-    let webRequests = WebRequestsService()
     
     public init(store: Store<CounterViewState, CounterViewAction>) {
         self.store = store
@@ -102,13 +112,14 @@ public struct CounterView: View {
             Button(action: self.nthPrimeButtonAction) {
                 Text("What is the \(ordinal(store.value.count)) prime?")
             }
-            .disabled(self.isNthPrimeButtonDisabled)
+            .disabled(self.store.value.isNthPrimeButtonDisabled)
         }
         .font(.title)
         .navigationTitle("Counter demo")
-        .alert(item: self.$alertNthPrime, content: { (item: PrimeAlert) -> Alert in
-            Alert(title: Text("The \(ordinal(store.value.count)) prime is \(item.prime)"),
-                  dismissButton: .default(Text("Ok")))
+        .alert(item: .constant(store.value.alertNthPrime),
+               content: { (item: PrimeAlert) -> Alert in
+                Alert(title: Text("The \(ordinal(store.value.count)) prime is \(item.prime)"),
+                      dismissButton: .default(Text("Ok")))
         })
         .sheet(isPresented: self.$isPrimeModalShown) {
             IsPrimeModalView(store: store.view(value: { $0.primeModalViewState },
@@ -118,10 +129,12 @@ public struct CounterView: View {
     }
     
     func nthPrimeButtonAction() {
-        self.isNthPrimeButtonDisabled = true
-        webRequests.nthPrime(store.value.count) { (prime) in
-            self.isNthPrimeButtonDisabled = false
-            self.alertNthPrime = prime.map(PrimeAlert.init(prime:))
-        }
+        store.send(.counter(.nthPrimeButtonTapped))
     }
+}
+
+private func ordinal(_ n: Int) -> String {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .ordinal
+    return formatter.string(for: n) ?? ""
 }
