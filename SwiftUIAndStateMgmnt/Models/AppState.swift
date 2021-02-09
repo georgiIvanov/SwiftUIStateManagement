@@ -13,6 +13,7 @@ import Counter
 struct AppState {
     var count = 0
     var favoritePrimes: [Int] = []
+    var alertNthPrime: PrimeAlert?
     var loggedInUser: User? = nil
     var activityFeed: [Activity] = []
     
@@ -49,12 +50,15 @@ extension AppState {
     var counterView: CounterViewState {
         get {
             return CounterViewState(count: self.count,
-                                    favoritePrimes: self.favoritePrimes)
+                                    favoritePrimes: self.favoritePrimes,
+                                    alertNthPrime: alertNthPrime,
+                                    isNthPrimeButtonDisabled: false)
         }
         
         set {
-            self.count = newValue.count
+            self.count = newValue.counter.count
             self.favoritePrimes = newValue.favoritePrimes
+            self.alertNthPrime = newValue.alertNthPrime
         }
     }
 }

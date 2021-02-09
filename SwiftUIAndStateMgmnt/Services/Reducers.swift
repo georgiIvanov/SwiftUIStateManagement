@@ -11,13 +11,14 @@ import FavoritePrimes
 import Counter
 
 func activityFeed(
-    _ reducer: @escaping (inout AppState, AppAction) -> Void
-) -> (inout AppState, AppAction) -> Void {
+    _ reducer: @escaping (inout AppState, AppAction) -> [Effect<AppAction>]
+) -> (inout AppState, AppAction) -> [Effect<AppAction>] {
     return { state, action in
         switch action {
         case .counterView(.counter),
              .favoritePrimes(.loadedFavoritePrimes),
-             .favoritePrimes(.saveButtonTapped):
+             .favoritePrimes(.saveButtonTapped),
+             .favoritePrimes(.loadButtonTapped):
             break
         case .counterView(.primeModal(.removeFavoritePrimeTapped)):
             state.activityFeed.append(.init(timestamp: Date(),
@@ -33,16 +34,16 @@ func activityFeed(
             }
         }
         
-        reducer(&state, action)
+        return reducer(&state, action)
     }
 }
 
-func createAppReducer() -> (inout AppState, AppAction) -> Void {
-    let reducer: (inout AppState, AppAction) -> Void = combine(
+func createAppReducer() -> (inout AppState, AppAction) -> [Effect<AppAction>] {
+    let reducer: (inout AppState, AppAction) -> [Effect<AppAction>] = combine(
         pullback(counterViewReducer, value: \.counterView, action: \.counterView),
         pullback(favoritePrimesReducer, value: \.favoritePrimes, action: \.favoritePrimes)
     )
     
-    return activityFeed(reducer)
+    return logging(activityFeed(reducer))
 }
 
