@@ -28,8 +28,8 @@ public func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction>(
         
         let localEffects = reducer(&globalValue[keyPath: value], localAction)
         return localEffects.map { localEffect in
-            { callback in
-                localEffect { localAction in
+            Effect { callback in
+                localEffect.run { localAction in
                     var globalAction = globalAction
                     globalAction[keyPath: action] = localAction
                     callback(globalAction)
@@ -45,7 +45,7 @@ public func logging<Value, Action>(
     return { value, action in
         let effects = reducer(&value, action)
         let valueCopy = value
-        return [{ _ in
+        return [Effect { _ in
             print("Action: \(action)")
             print("Value:")
             dump(valueCopy)

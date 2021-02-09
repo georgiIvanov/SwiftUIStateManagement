@@ -7,7 +7,17 @@
 
 import Combine
 
-public typealias Effect<Action> = (@escaping (Action) -> Void) -> Void
+public struct Effect<A> {
+    public let run: (@escaping (A) -> Void) -> Void
+    
+    public init(run: @escaping (@escaping (A) -> Void) -> Void) {
+        self.run = run
+    }
+    
+    public func map<B>(_ f: @escaping (A) -> B) -> Effect<B> {
+        return Effect<B> { callback in self.run { arg in callback(f(arg))} }
+    }
+}
 
 public typealias Reducer<Value, Action> = (inout Value, Action) -> [Effect<Action>]
 
@@ -24,7 +34,7 @@ public class Store<Value, Action>: ObservableObject {
     public func send(_ action: Action) {
         let effects = reducer(&value, action)
         effects.forEach { effect in
-            effect(self.send)
+            effect.run(self.send)
         }
     }
     

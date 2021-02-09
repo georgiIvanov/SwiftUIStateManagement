@@ -32,7 +32,7 @@ public func counterReducer(state: inout CounterState, action: CounterAction) -> 
         return []
     case .nthPrimeButtonTapped:
         state.isNthPrimeButtonDisabled = true
-        return [{ [count = state.count] callback in
+        return [Effect { [count = state.count] callback in
             WebRequestsService().nthPrime(count) { (prime) in
                 DispatchQueue.main.async {
                     callback(.nthPrimeResponse(prime))
