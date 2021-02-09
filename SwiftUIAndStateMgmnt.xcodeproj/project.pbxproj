@@ -43,6 +43,7 @@
 		9778CB0825BE0FC600E969CF /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB0725BE0FC600E969CF /* AppActions.swift */; };
 		9778CB1025BE28E400E969CF /* Reducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB0F25BE28E400E969CF /* Reducers.swift */; };
 		9778CB1525BE3E6000E969CF /* FavoritePrimesState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB1425BE3E6000E969CF /* FavoritePrimesState.swift */; };
+		978F9D6925D343D000526762 /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978F9D6825D343D000526762 /* Effect.swift */; };
 		97DD41E025C760AA0049FF78 /* ComposableArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD41D725C760AA0049FF78 /* ComposableArchitecture.framework */; };
 		97DD41E725C760AA0049FF78 /* ComposableArchitectureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DD41E625C760AA0049FF78 /* ComposableArchitectureTests.swift */; };
 		97DD41E925C760AA0049FF78 /* ComposableArchitecture.h in Headers */ = {isa = PBXBuildFile; fileRef = 97DD41D925C760AA0049FF78 /* ComposableArchitecture.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -215,6 +216,7 @@
 		9778CB0725BE0FC600E969CF /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		9778CB0F25BE28E400E969CF /* Reducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducers.swift; sourceTree = "<group>"; };
 		9778CB1425BE3E6000E969CF /* FavoritePrimesState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePrimesState.swift; sourceTree = "<group>"; };
+		978F9D6825D343D000526762 /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
 		97DD41D725C760AA0049FF78 /* ComposableArchitecture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ComposableArchitecture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		97DD41D925C760AA0049FF78 /* ComposableArchitecture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposableArchitecture.h; sourceTree = "<group>"; };
 		97DD41DA25C760AA0049FF78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -487,6 +489,7 @@
 			isa = PBXGroup;
 			children = (
 				9778CB0225BE0C0300E969CF /* Store.swift */,
+				978F9D6825D343D000526762 /* Effect.swift */,
 				97DD420125C7610A0049FF78 /* ComposeFunctions.swift */,
 				97DD41D925C760AA0049FF78 /* ComposableArchitecture.h */,
 				97DD41DA25C760AA0049FF78 /* Info.plist */,
@@ -996,6 +999,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				978F9D6925D343D000526762 /* Effect.swift in Sources */,
 				97DD420225C7610A0049FF78 /* ComposeFunctions.swift in Sources */,
 				97DD41FA25C760DA0049FF78 /* Store.swift in Sources */,
 			);
