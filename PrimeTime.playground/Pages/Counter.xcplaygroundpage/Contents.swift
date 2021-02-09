@@ -1,8 +1,6 @@
 import ComposableArchitecture
-import FavoritePrimes
 import SwiftUI
 import PlaygroundSupport
-import PrimeModal
 import Counter
 
 PlaygroundPage.current.liveView = UIHostingController(
@@ -14,7 +12,7 @@ PlaygroundPage.current.liveView = UIHostingController(
                 alertNthPrime: nil,
                 isNthPrimeButtonDisabled: false
             ),
-            reducer: counterViewReducer
+            reducer: logging(counterViewReducer)
         )
     )
 )

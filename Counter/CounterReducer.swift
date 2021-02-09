@@ -12,8 +12,9 @@ import PrimeModal
 public enum CounterAction {
     case decrTapped
     case incrTapped
-    case nthPrimeButtonTapped
     case nthPrimeResponse(Int?)
+    case nthPrimeButtonTapped
+    case alertDismissButtonTapped
 }
 
 public let counterViewReducer: (inout CounterViewState, CounterViewAction) -> [Effect<CounterViewAction>] = combine(
@@ -31,21 +32,19 @@ public func counterReducer(state: inout CounterState, action: CounterAction) -> 
         return []
     case .nthPrimeButtonTapped:
         state.isNthPrimeButtonDisabled = true
-        return [{ [count = state.count] in
-            var resultNumber: Int?
-            let semaphore = DispatchSemaphore(value: 0)
+        return [{ [count = state.count] callback in
             WebRequestsService().nthPrime(count) { (prime) in
-                resultNumber = prime
-                semaphore.signal()
+                DispatchQueue.main.async {
+                    callback(.nthPrimeResponse(prime))
+                }
             }
-            
-            semaphore.wait()
-            
-            return .nthPrimeResponse(resultNumber)
         }]
     case let .nthPrimeResponse(prime):
         state.alertNthPrime = prime.map(PrimeAlert.init)
         state.isNthPrimeButtonDisabled = false
+        return []
+    case .alertDismissButtonTapped:
+        state.alertNthPrime = nil
         return []
     }
     

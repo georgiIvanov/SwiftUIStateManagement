@@ -23,10 +23,10 @@ public typealias CounterState = (
 )
 
 public struct CounterViewState {
-    var count: Int
-    var favoritePrimes: [Int]
-    var alertNthPrime: PrimeAlert?
-    var isNthPrimeButtonDisabled: Bool = false
+    public var count: Int
+    public var favoritePrimes: [Int]
+    public var alertNthPrime: PrimeAlert?
+    public var isNthPrimeButtonDisabled: Bool = false
     
     public var counter: CounterState {
         get {
@@ -119,7 +119,7 @@ public struct CounterView: View {
         .alert(item: .constant(store.value.alertNthPrime),
                content: { (item: PrimeAlert) -> Alert in
                 Alert(title: Text("The \(ordinal(store.value.count)) prime is \(item.prime)"),
-                      dismissButton: .default(Text("Ok")))
+                      dismissButton: .default(Text("Ok"), action: { self.store.send(.counter(.alertDismissButtonTapped)) }))
         })
         .sheet(isPresented: self.$isPrimeModalShown) {
             IsPrimeModalView(store: store.view(value: { $0.primeModalViewState },
