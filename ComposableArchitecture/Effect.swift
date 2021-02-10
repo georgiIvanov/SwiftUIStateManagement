@@ -6,46 +6,38 @@
 //
 
 import Foundation
+import Combine
 
-public struct Effect<A> {
-    public let run: (@escaping (A) -> Void) -> Void
+/// The effect's only purpose is to ultimately produce an action that is fed back into the store.
+/// Even if it errors in some way it still needs to produce an action. The effect publisher itself should not fail.
+public struct Effect<Output>: Publisher {
     
-    public init(run: @escaping (@escaping (A) -> Void) -> Void) {
-        self.run = run
+    public typealias Failure = Never
+    
+    let publisher: AnyPublisher<Output, Failure>
+    
+    public func receive<S>(subscriber: S) where S : Subscriber, Failure == S.Failure, Output == S.Input {
+        publisher.receive(subscriber: subscriber)
     }
-    
-    public func map<B>(_ f: @escaping (A) -> B) -> Effect<B> {
-        return Effect<B> { callback in self.run { arg in callback(f(arg))} }
+}
+
+extension Publisher where Failure == Never {
+    /// Publishers come with many operations but they don't return the exact same type they acted upon.
+    /// Only something that is conforming to the Publisher protocol.
+    /// Use this method to erase any information away and return a simple Effect<Output>
+    /// See - https://www.thomasvisser.me/2019/07/04/combine-types/
+    public func eraseToEffect() -> Effect<Output> {
+        return Effect(publisher: self.eraseToAnyPublisher())
     }
 }
 
 // MARK: - Effects
 
 extension Effect {
-    public func receive(on queue: DispatchQueue) -> Effect {
-        return Effect { callback in
-            self.run { result in
-                queue.async {
-                    callback(result)
-                }
-            }
-        }
-    }
-}
-
-extension Effect where A == (Data?, URLResponse?, Error?) {
-    public func decode<M: Decodable>(as type: M.Type) -> Effect<M?> {
-        return self.map { data, _, _ in
-            data.flatMap { try? JSONDecoder().decode(M.self, from: $0) }
-        }
-    }
-}
-
-public func dataTask(with url: URL) -> Effect<(Data?, URLResponse?, Error?)> {
-    return Effect { callback in
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            callback((data, response, error))
-        }
-        .resume()
+    public static func fireAndForget(work: @escaping () -> Void) -> Effect {
+        return Deferred { () -> Empty<Output, Never> in
+            work()
+            return Empty(completeImmediately: true)
+        }.eraseToEffect()
     }
 }

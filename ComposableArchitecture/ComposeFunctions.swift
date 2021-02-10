@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 public func combine<Value, Action>(
     _ reducers: Reducer<Value, Action>...
@@ -28,13 +29,12 @@ public func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction>(
         
         let localEffects = reducer(&globalValue[keyPath: value], localAction)
         return localEffects.map { localEffect in
-            Effect { callback in
-                localEffect.run { localAction in
-                    var globalAction = globalAction
+            localEffect.map { localAction in
+                var globalAction = globalAction
                     globalAction[keyPath: action] = localAction
-                    callback(globalAction)
-                }
+                    return globalAction
             }
+            .eraseToEffect()
         }
     }
 }
@@ -45,7 +45,8 @@ public func logging<Value, Action>(
     return { value, action in
         let effects = reducer(&value, action)
         let valueCopy = value
-        return [Effect { _ in
+        
+        return [.fireAndForget {
             print("Action: \(action)")
             print("Value:")
             dump(valueCopy)
