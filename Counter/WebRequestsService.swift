@@ -38,13 +38,4 @@ class WebRequestsService {
 
         return dataTask(with: components.url(relativeTo: nil)!).decode(as: WolframAlphaResult.self)
     }
-    
-    func dataTask(with url: URL) -> Effect<(Data?, URLResponse?, Error?)> {
-        return Effect { callback in
-            URLSession.shared.dataTask(with: url) { data, response, error in
-                callback((data, response, error))
-            }
-            .resume()
-        }
-    }
 }

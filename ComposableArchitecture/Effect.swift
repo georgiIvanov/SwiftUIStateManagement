@@ -17,7 +17,11 @@ public struct Effect<A> {
     public func map<B>(_ f: @escaping (A) -> B) -> Effect<B> {
         return Effect<B> { callback in self.run { arg in callback(f(arg))} }
     }
-    
+}
+
+// MARK: - Effects
+
+extension Effect {
     public func receive(on queue: DispatchQueue) -> Effect {
         return Effect { callback in
             self.run { result in
@@ -34,5 +38,14 @@ extension Effect where A == (Data?, URLResponse?, Error?) {
         return self.map { data, _, _ in
             data.flatMap { try? JSONDecoder().decode(M.self, from: $0) }
         }
+    }
+}
+
+public func dataTask(with url: URL) -> Effect<(Data?, URLResponse?, Error?)> {
+    return Effect { callback in
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            callback((data, response, error))
+        }
+        .resume()
     }
 }
