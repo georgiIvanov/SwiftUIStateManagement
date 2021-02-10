@@ -4,5 +4,6 @@
         <page name='FavoritePrimes'/>
         <page name='IsPrimeModal'/>
         <page name='Counter'/>
+        <page name='Combine'/>
     </pages>
 </playground>
