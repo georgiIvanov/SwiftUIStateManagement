@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "1240"
+   version = "1.3">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "97754F3C25BCB9190099EDDC"
+               BuildableName = "SwiftUIAndStateMgmnt.app"
+               BlueprintName = "SwiftUIAndStateMgmnt"
+               ReferencedContainer = "container:SwiftUIAndStateMgmnt.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "97754F5225BCB91B0099EDDC"
+               BuildableName = "SwiftUIAndStateMgmntTests.xctest"
+               BlueprintName = "SwiftUIAndStateMgmntTests"
+               ReferencedContainer = "container:SwiftUIAndStateMgmnt.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "97754F5D25BCB91B0099EDDC"
+               BuildableName = "SwiftUIAndStateMgmntUITests.xctest"
+               BlueprintName = "SwiftUIAndStateMgmntUITests"
+               ReferencedContainer = "container:SwiftUIAndStateMgmnt.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "97DD41DE25C760AA0049FF78"
+               BuildableName = "ComposableArchitectureTests.xctest"
+               BlueprintName = "ComposableArchitectureTests"
+               ReferencedContainer = "container:SwiftUIAndStateMgmnt.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "97375D4325C8A712007E9AC5"
+               BuildableName = "FavoritePrimesTests.xctest"
+               BlueprintName = "FavoritePrimesTests"
+               ReferencedContainer = "container:SwiftUIAndStateMgmnt.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "97375DA325C8AF77007E9AC5"
+               BuildableName = "PrimeModalTests.xctest"
+               BlueprintName = "PrimeModalTests"
+               ReferencedContainer = "container:SwiftUIAndStateMgmnt.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "97375DEF25C8B6FB007E9AC5"
+               BuildableName = "CounterTests.xctest"
+               BlueprintName = "CounterTests"
+               ReferencedContainer = "container:SwiftUIAndStateMgmnt.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "97754F3C25BCB9190099EDDC"
+            BuildableName = "SwiftUIAndStateMgmnt.app"
+            BlueprintName = "SwiftUIAndStateMgmnt"
+            ReferencedContainer = "container:SwiftUIAndStateMgmnt.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "97754F3C25BCB9190099EDDC"
+            BuildableName = "SwiftUIAndStateMgmnt.app"
+            BlueprintName = "SwiftUIAndStateMgmnt"
+            ReferencedContainer = "container:SwiftUIAndStateMgmnt.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>

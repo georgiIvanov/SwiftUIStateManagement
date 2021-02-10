@@ -771,7 +771,6 @@
 					};
 					97375DA325C8AF77007E9AC5 = {
 						CreatedOnToolsVersion = 12.3;
-						TestTargetID = 97754F3C25BCB9190099EDDC;
 					};
 					97375DE725C8B6FA007E9AC5 = {
 						CreatedOnToolsVersion = 12.3;
@@ -1261,7 +1260,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUIAndStateMgmnt.app/SwiftUIAndStateMgmnt";
 			};
 			name = Debug;
 		};
@@ -1280,7 +1278,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUIAndStateMgmnt.app/SwiftUIAndStateMgmnt";
 			};
 			name = Release;
 		};
