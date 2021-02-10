@@ -3,12 +3,13 @@ import Dispatch
 import Combine
 
 // How async work is done with Effect and GCD
+// This was when Effect was a normal struct
 
-let anIntInTwoSeconds = Effect<Int> { callback in
-    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-        callback(42)
-    }
-}
+//let anIntInTwoSeconds = Effect<Int> { callback in
+//    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//        callback(42)
+//    }
+//}
 
 //anIntInTwoSeconds.run { number in print(number) }
 //
@@ -67,14 +68,19 @@ let cancellable = futureInt.sink { (number) in
     print("Got \(number) from sink.")
 }
 
-
-
 // A way of sending multiple values to a subscriber is Subject
 
-let passtrhough = PassthroughSubject<Int, Never>.init()
+let passtrhough = PassthroughSubject<Int, Error>.init()
 let currentValue = CurrentValueSubject<Int, Never>(2)
 
-let c1 = passtrhough.sink { x in
+let c1 = passtrhough.sink { (completion) in
+    switch completion {
+    case let .failure(error):
+        print("Subject errored", error)
+        break
+    case .finished: break
+    }
+} receiveValue: { (x) in
     print("passthrough", x)
 }
 
@@ -82,5 +88,6 @@ let c2 = currentValue.sink { x in
     print("currentValue", x)
 }
 
+//passtrhough.send(completion: .failure(URLError.init(URLError.Code.badURL)))
 passtrhough.send(1000)
 currentValue.send(5000)
