@@ -8,6 +8,7 @@
 import Foundation
 import ComposableArchitecture
 import PrimeModal
+import Combine
 
 public enum CounterAction {
     case decrTapped
@@ -35,7 +36,8 @@ public func counterReducer(state: inout CounterState, action: CounterAction) -> 
         return [
             WebRequestsService().nthPrime(state.count)
                 .map(CounterAction.nthPrimeResponse)
-                .receive(on: .main)
+                .receive(on: DispatchQueue.main)
+                .eraseToEffect()
         ]
     case let .nthPrimeResponse(prime):
         state.alertNthPrime = prime.map(PrimeAlert.init)

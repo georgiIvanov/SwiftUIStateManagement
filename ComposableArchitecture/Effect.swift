@@ -25,7 +25,7 @@ extension Publisher where Failure == Never {
     /// Publishers come with many operations but they don't return the exact same type they acted upon.
     /// Only something that is conforming to the Publisher protocol.
     /// Use this method to erase any information away and return a simple Effect<Output>
-    /// See - https://www.thomasvisser.me/2019/07/04/combine-types/
+    /// See - https://www.thomasvisser.me/2019/07/04/combine-types/ (operator fusion)
     public func eraseToEffect() -> Effect<Output> {
         return Effect(publisher: self.eraseToAnyPublisher())
     }
@@ -38,6 +38,12 @@ extension Effect {
         return Deferred { () -> Empty<Output, Never> in
             work()
             return Empty(completeImmediately: true)
+        }.eraseToEffect()
+    }
+    
+    public static func sync(work: @escaping () -> Output) -> Effect {
+        return Deferred {
+            Just(work())
         }.eraseToEffect()
     }
 }
