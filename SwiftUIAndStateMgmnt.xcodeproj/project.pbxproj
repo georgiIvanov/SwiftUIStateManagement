@@ -764,7 +764,6 @@
 					};
 					97375D4325C8A712007E9AC5 = {
 						CreatedOnToolsVersion = 12.3;
-						TestTargetID = 97754F3C25BCB9190099EDDC;
 					};
 					97375D9B25C8AF77007E9AC5 = {
 						CreatedOnToolsVersion = 12.3;
@@ -777,7 +776,6 @@
 					};
 					97375DEF25C8B6FB007E9AC5 = {
 						CreatedOnToolsVersion = 12.3;
-						TestTargetID = 97754F3C25BCB9190099EDDC;
 					};
 					97754F3C25BCB9190099EDDC = {
 						CreatedOnToolsVersion = 12.3;
@@ -795,7 +793,6 @@
 					};
 					97DD41DE25C760AA0049FF78 = {
 						CreatedOnToolsVersion = 12.3;
-						TestTargetID = 97754F3C25BCB9190099EDDC;
 					};
 				};
 			};
@@ -1168,7 +1165,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUIAndStateMgmnt.app/SwiftUIAndStateMgmnt";
 			};
 			name = Debug;
 		};
@@ -1187,7 +1183,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUIAndStateMgmnt.app/SwiftUIAndStateMgmnt";
 			};
 			name = Release;
 		};
@@ -1350,7 +1345,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUIAndStateMgmnt.app/SwiftUIAndStateMgmnt";
 			};
 			name = Debug;
 		};
@@ -1369,7 +1363,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUIAndStateMgmnt.app/SwiftUIAndStateMgmnt";
 			};
 			name = Release;
 		};
@@ -1682,7 +1675,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUIAndStateMgmnt.app/SwiftUIAndStateMgmnt";
 			};
 			name = Debug;
 		};
@@ -1701,7 +1693,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftUIAndStateMgmnt.app/SwiftUIAndStateMgmnt";
 			};
 			name = Release;
 		};
