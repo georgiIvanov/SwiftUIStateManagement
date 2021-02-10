@@ -9,7 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 import PrimeModal
 
-public struct PrimeAlert: Identifiable {
+public struct PrimeAlert: Identifiable, Equatable {
     let prime: Int
     public var id: Int {
         self.prime
@@ -22,7 +22,7 @@ public typealias CounterState = (
     isNthPrimeButtonDisabled: Bool
 )
 
-public struct CounterViewState {
+public struct CounterViewState: Equatable {
     public var count: Int
     public var favoritePrimes: [Int]
     public var alertNthPrime: PrimeAlert?
