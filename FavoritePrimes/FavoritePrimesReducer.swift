@@ -26,7 +26,7 @@ public func favoritePrimesReducer(state: inout [Int], action: FavoritePrimesActi
 }
 
 private func loadEffect() -> Effect<FavoritePrimesAction> {
-    return { callback in
+    return Effect { callback in
         guard let data = try? Data(contentsOf: getFavoritePrimesUrl()),
               let favoritePrimes = try? JSONDecoder().decode([Int].self, from: data) else {
             callback(.loadedFavoritePrimes([]))
@@ -38,7 +38,7 @@ private func loadEffect() -> Effect<FavoritePrimesAction> {
 }
 
 private func saveEffect(favoritePrimes: [Int]) -> Effect<FavoritePrimesAction> {
-    return { _ in
+    return Effect { _ in
         let data = try! JSONEncoder().encode(favoritePrimes)
         try! data.write(to: getFavoritePrimesUrl())
     }

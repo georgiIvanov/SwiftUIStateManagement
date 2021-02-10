@@ -11,8 +11,8 @@ import FavoritePrimes
 import Counter
 
 func activityFeed(
-    _ reducer: @escaping (inout AppState, AppAction) -> [Effect<AppAction>]
-) -> (inout AppState, AppAction) -> [Effect<AppAction>] {
+    _ reducer: @escaping Reducer<AppState, AppAction>
+) -> Reducer<AppState, AppAction> {
     return { state, action in
         switch action {
         case .counterView(.counter),
