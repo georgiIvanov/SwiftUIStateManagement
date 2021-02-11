@@ -7,6 +7,7 @@
 
 import Foundation
 import ComposableArchitecture
+import Combine
 
 public func favoritePrimesReducer(state: inout [Int], action: FavoritePrimesAction) -> [Effect<FavoritePrimesAction>] {
     switch action {
@@ -19,36 +20,17 @@ public func favoritePrimesReducer(state: inout [Int], action: FavoritePrimesActi
         state = favoritePrimes
         return []
     case .saveButtonTapped:
-        return [saveEffect(favoritePrimes: state)]
+        return [currentEnv.fileClient.save("favoritePrimes.json",
+                                        try! JSONEncoder().encode(state)).fireAndForget()]
     case .loadButtonTapped:
-        return [loadEffect().compactMap { $0 }.eraseToEffect()]
+        // TODO: Handle error
+        return [currentEnv.fileClient
+                    .load("favoritePrimes.json")
+                    .compactMap { $0 }
+                    .decode(type: [Int].self, decoder: JSONDecoder())
+                    .catch { error in Empty(completeImmediately: true) }
+                    .map(FavoritePrimesAction.loadedFavoritePrimes)
+                    .eraseToEffect()
+        ]
     }
-}
-
-private func loadEffect() -> Effect<FavoritePrimesAction?> {
-    return .sync {
-        guard let data = try? Data(contentsOf: getFavoritePrimesUrl()),
-              let favoritePrimes = try? JSONDecoder().decode([Int].self, from: data) else {
-            return nil
-        }
-        
-        return .loadedFavoritePrimes(favoritePrimes)
-    }
-}
-
-private func saveEffect(favoritePrimes: [Int]) -> Effect<FavoritePrimesAction> {
-    return .fireAndForget {
-        let data = try! JSONEncoder().encode(favoritePrimes)
-        try! data.write(to: getFavoritePrimesUrl())
-    }
-}
-
-private func getFavoritePrimesUrl() -> URL {
-    let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,
-                                                           .userDomainMask,
-                                                           true)[0]
-    
-    let documentsUrl = URL(fileURLWithPath: documentPath)
-    let favoritePrimesUrl = documentsUrl.appendingPathComponent("favoritePrimes.json")
-    return favoritePrimesUrl
 }

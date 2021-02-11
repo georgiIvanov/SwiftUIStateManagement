@@ -29,7 +29,7 @@ extension FavoritePrimesEnvironment {
 }
 
 #if DEBUG
-var Current = FavoritePrimesEnvironment.live
+var currentEnv = FavoritePrimesEnvironment.live
 #else
-let Current = FavoritePrimesEnvironment.live
+let currentEnv = FavoritePrimesEnvironment.live
 #endif

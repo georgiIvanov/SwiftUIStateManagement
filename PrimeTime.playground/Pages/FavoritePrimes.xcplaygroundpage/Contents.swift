@@ -1,9 +1,11 @@
 import ComposableArchitecture
-import FavoritePrimes
+@testable import FavoritePrimes
 import SwiftUI
 import PlaygroundSupport
 import PrimeModal
 import Counter
+
+currentEnv = .mock
 
 PlaygroundPage.current.liveView = UIHostingController(
     rootView: NavigationView {
