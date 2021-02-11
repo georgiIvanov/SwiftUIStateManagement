@@ -57,7 +57,7 @@ public struct CounterViewState: Equatable {
     }
 }
 
-public enum CounterViewAction {
+public enum CounterViewAction: Equatable {
     case counter(CounterAction)
     case primeModal(PrimeModalAction)
     

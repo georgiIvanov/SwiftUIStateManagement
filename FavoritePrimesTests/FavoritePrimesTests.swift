@@ -8,15 +8,11 @@
 import XCTest
 @testable import FavoritePrimes
 
-let mockEnv = {
-    FavoritePrimesEnvironment.mock
-}()
-
 class FavoritePrimesTests: XCTestCase {
     
-    override func setUp() {
+    override class func setUp() {
         super.setUp()
-        currentEnv = mockEnv
+        currentEnv = FavoritePrimesEnvironment.mock
     }
     
     func testDeleteFavoritePrimes() throws {

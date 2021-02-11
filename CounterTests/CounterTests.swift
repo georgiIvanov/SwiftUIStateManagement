@@ -7,8 +7,15 @@
 
 import XCTest
 @testable import Counter
+import Combine
 
 class CounterTests: XCTestCase {
+    
+    override class func setUp() {
+        super.setUp()
+        currentEnv = .mock
+    }
+    
     func testIncrButtonTapped() throws {
         var state = CounterViewState(count: 2,
                                      favoritePrimes: [3, 5],
@@ -42,6 +49,11 @@ class CounterTests: XCTestCase {
     }
     
     func testNthPrimeButtonHappyFlow() throws {
+        
+        let nthPrime = 17
+        
+        currentEnv.nthPrime = { _ in .sync { nthPrime } }
+        
         var state = CounterViewState(count: 2,
                                      favoritePrimes: [3, 5],
                                      alertNthPrime: nil,
@@ -56,12 +68,27 @@ class CounterTests: XCTestCase {
                                         isNthPrimeButtonDisabled: true))
         XCTAssertEqual(effects.count, 1)
         
-        effects = counterViewReducer(&state, .counter(.nthPrimeResponse(3)))
+        var nextAction: CounterViewAction!
+        let receivedCompletion = expectation(description: "receivedCompletion")
+        
+        let cancellable = effects[0].sink(receiveCompletion: { _ in
+            receivedCompletion.fulfill()
+        }, receiveValue: { action in
+            XCTAssertEqual(action, .counter(.nthPrimeResponse(nthPrime)))
+            nextAction = action
+        })
+        
+        // We need to hold cancellable to receive sink events
+        // then silence the warning for not using it anywhere by using method below
+        withExtendedLifetime(cancellable, {})
+        
+        wait(for: [receivedCompletion], timeout: 0.01)
+        effects = counterViewReducer(&state, nextAction)
         
         XCTAssertEqual(state,
                        CounterViewState(count: 2,
                                         favoritePrimes: [3, 5],
-                                        alertNthPrime: PrimeAlert(prime: 3),
+                                        alertNthPrime: PrimeAlert(prime: nthPrime),
                                         isNthPrimeButtonDisabled: false))
         XCTAssert(effects.isEmpty)
         
@@ -76,6 +103,10 @@ class CounterTests: XCTestCase {
     }
     
     func testNthPrimeButtonUnhappyFlow() throws {
+        
+        // TODO: Make nth prime return error and test for it
+        currentEnv.nthPrime = { _ in .sync { nil } }
+        
         var state = CounterViewState(count: 2,
                                      favoritePrimes: [3, 5],
                                      alertNthPrime: nil,
@@ -90,7 +121,22 @@ class CounterTests: XCTestCase {
                                         isNthPrimeButtonDisabled: true))
         XCTAssertEqual(effects.count, 1)
         
-        effects = counterViewReducer(&state, .counter(.nthPrimeResponse(nil)))
+        var nextAction: CounterViewAction!
+        let receivedCompletion = expectation(description: "receivedCompletion")
+        
+        let cancellable = effects[0].sink(receiveCompletion: { _ in
+            receivedCompletion.fulfill()
+        }, receiveValue: { action in
+            XCTAssertEqual(action, .counter(.nthPrimeResponse(nil)))
+            nextAction = action
+        })
+        
+        // We need to hold cancellable to receive sink events
+        // then silence the warning for not using it anywhere by using method below
+        withExtendedLifetime(cancellable, {})
+        
+        wait(for: [receivedCompletion], timeout: 0.01)
+        effects = counterViewReducer(&state, nextAction)
         
         XCTAssertEqual(state,
                        CounterViewState(count: 2,

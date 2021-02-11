@@ -10,7 +10,7 @@ import ComposableArchitecture
 import PrimeModal
 import Combine
 
-public enum CounterAction {
+public enum CounterAction: Equatable {
     case decrTapped
     case incrTapped
     case nthPrimeResponse(Int?)

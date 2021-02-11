@@ -14,8 +14,7 @@ struct CounterEnvironment {
 
 extension CounterEnvironment {
     static let live = CounterEnvironment { (nthPrimeNumber) -> Effect<Int?> in
-        let service = WebRequestsService()
-        return service.nthPrime(nthPrimeNumber)
+        return WebRequestsService().nthPrime(nthPrimeNumber)
     }
     
 #if DEBUG
