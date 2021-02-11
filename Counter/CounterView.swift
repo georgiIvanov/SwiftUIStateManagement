@@ -49,7 +49,10 @@ public struct CounterViewState: Equatable {
         }
     }
     
-    public init(count: Int, favoritePrimes: [Int], alertNthPrime: PrimeAlert?, isNthPrimeButtonDisabled: Bool) {
+    public init(count: Int = 0,
+                favoritePrimes: [Int] = [],
+                alertNthPrime: PrimeAlert? = nil,
+                isNthPrimeButtonDisabled: Bool = false) {
         self.count = count
         self.favoritePrimes = favoritePrimes
         self.alertNthPrime = alertNthPrime

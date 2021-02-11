@@ -17,34 +17,22 @@ class CounterTests: XCTestCase {
     }
     
     func testIncrButtonTapped() throws {
-        var state = CounterViewState(count: 2,
-                                     favoritePrimes: [3, 5],
-                                     alertNthPrime: nil,
-                                     isNthPrimeButtonDisabled: false)
-        
+        var state = CounterViewState(count: 2)
+        var expected = state
         let effects = counterViewReducer(&state, .counter(.incrTapped))
         
-        XCTAssertEqual(state,
-                       CounterViewState(count: 3,
-                                        favoritePrimes: [3, 5],
-                                        alertNthPrime: nil,
-                                        isNthPrimeButtonDisabled: false))
+        expected.count = 3
+        XCTAssertEqual(state, expected)
         XCTAssert(effects.isEmpty)
     }
     
     func testDecrButtonTapped() throws {
-        var state = CounterViewState(count: 2,
-                                     favoritePrimes: [3, 5],
-                                     alertNthPrime: nil,
-                                     isNthPrimeButtonDisabled: false)
-        
+        var state = CounterViewState(count: 2)
+        var expected = state
         let effects = counterViewReducer(&state, .counter(.decrTapped))
         
-        XCTAssertEqual(state,
-                       CounterViewState(count: 1,
-                                        favoritePrimes: [3, 5],
-                                        alertNthPrime: nil,
-                                        isNthPrimeButtonDisabled: false))
+        expected.count = 1
+        XCTAssertEqual(state, expected)
         XCTAssert(effects.isEmpty)
     }
     
@@ -54,18 +42,13 @@ class CounterTests: XCTestCase {
         
         currentEnv.nthPrime = { _ in .sync { nthPrime } }
         
-        var state = CounterViewState(count: 2,
-                                     favoritePrimes: [3, 5],
-                                     alertNthPrime: nil,
+        var state = CounterViewState(alertNthPrime: nil,
                                      isNthPrimeButtonDisabled: false)
-        
+        var expected = state
         var effects = counterViewReducer(&state, .counter(.nthPrimeButtonTapped))
         
-        XCTAssertEqual(state,
-                       CounterViewState(count: 2,
-                                        favoritePrimes: [3, 5],
-                                        alertNthPrime: nil,
-                                        isNthPrimeButtonDisabled: true))
+        expected.isNthPrimeButtonDisabled = true
+        XCTAssertEqual(state, expected)
         XCTAssertEqual(effects.count, 1)
         
         var nextAction: CounterViewAction!
@@ -85,20 +68,15 @@ class CounterTests: XCTestCase {
         wait(for: [receivedCompletion], timeout: 0.01)
         effects = counterViewReducer(&state, nextAction)
         
-        XCTAssertEqual(state,
-                       CounterViewState(count: 2,
-                                        favoritePrimes: [3, 5],
-                                        alertNthPrime: PrimeAlert(prime: nthPrime),
-                                        isNthPrimeButtonDisabled: false))
+        expected.alertNthPrime = PrimeAlert(prime: nthPrime)
+        expected.isNthPrimeButtonDisabled = false
+        XCTAssertEqual(state, expected)
         XCTAssert(effects.isEmpty)
         
         effects = counterViewReducer(&state, .counter(.alertDismissButtonTapped))
         
-        XCTAssertEqual(state,
-                       CounterViewState(count: 2,
-                                        favoritePrimes: [3, 5],
-                                        alertNthPrime: nil,
-                                        isNthPrimeButtonDisabled: false))
+        expected.alertNthPrime = nil
+        XCTAssertEqual(state, expected)
         XCTAssert(effects.isEmpty)
     }
     
