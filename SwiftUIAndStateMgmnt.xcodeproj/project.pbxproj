@@ -40,6 +40,8 @@
 		97754F5825BCB91B0099EDDC /* SwiftUIAndStateMgmntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97754F5725BCB91B0099EDDC /* SwiftUIAndStateMgmntTests.swift */; };
 		97754F6325BCB91B0099EDDC /* SwiftUIAndStateMgmntUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97754F6225BCB91B0099EDDC /* SwiftUIAndStateMgmntUITests.swift */; };
 		97754F7425BCB93A0099EDDC /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97754F7325BCB93A0099EDDC /* AppState.swift */; };
+		9778B03825D5143A00ABEEAC /* FavoritePrimesEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778B03725D5143A00ABEEAC /* FavoritePrimesEnvironment.swift */; };
+		9778B04425D5163300ABEEAC /* FileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778B04325D5163300ABEEAC /* FileClient.swift */; };
 		9778CB0825BE0FC600E969CF /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB0725BE0FC600E969CF /* AppActions.swift */; };
 		9778CB1025BE28E400E969CF /* Reducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB0F25BE28E400E969CF /* Reducers.swift */; };
 		9778CB1525BE3E6000E969CF /* FavoritePrimesState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB1425BE3E6000E969CF /* FavoritePrimesState.swift */; };
@@ -212,6 +214,8 @@
 		97754F6425BCB91B0099EDDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97754F7325BCB93A0099EDDC /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		97754F7825BCB9560099EDDC /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
+		9778B03725D5143A00ABEEAC /* FavoritePrimesEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePrimesEnvironment.swift; sourceTree = "<group>"; };
+		9778B04325D5163300ABEEAC /* FileClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileClient.swift; sourceTree = "<group>"; };
 		9778CB0225BE0C0300E969CF /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		9778CB0725BE0FC600E969CF /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		9778CB0F25BE28E400E969CF /* Reducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducers.swift; sourceTree = "<group>"; };
@@ -325,6 +329,8 @@
 				97375D6B25C8A751007E9AC5 /* FavoritePrimesReducer.swift */,
 				97375D3E25C8A712007E9AC5 /* FavoritePrimes.h */,
 				97375D3F25C8A712007E9AC5 /* Info.plist */,
+				9778B03725D5143A00ABEEAC /* FavoritePrimesEnvironment.swift */,
+				9778B04325D5163300ABEEAC /* FileClient.swift */,
 			);
 			path = FavoritePrimes;
 			sourceTree = "<group>";
@@ -912,7 +918,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9778B03825D5143A00ABEEAC /* FavoritePrimesEnvironment.swift in Sources */,
 				97375D7625C8A7DF007E9AC5 /* FavoritePrimesView.swift in Sources */,
+				9778B04425D5163300ABEEAC /* FileClient.swift in Sources */,
 				97375D7525C8A7DF007E9AC5 /* FavoritePrimesReducer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
