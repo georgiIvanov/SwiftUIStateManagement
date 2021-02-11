@@ -50,8 +50,16 @@ func assert<Value: Equatable, Action: Equatable>(initialValue: Value,
         var expected = state
         switch step.type {
         case .send:
+            if !effects.isEmpty {
+                XCTFail("Action sent before handling \(effects.count) pending effect/s!", file: step.file, line: step.line)
+            }
             effects.append(contentsOf: reducer(&state, step.action))
         case .receive:
+            guard !effects.isEmpty else {
+                XCTFail("No pending effects to receive from.", file: step.file, line: step.line)
+                break
+            }
+            
             let effect = effects.removeFirst()
             var action: Action!
             let receivedCompletion = XCTestExpectation(description: "receivedCompletion")
@@ -76,6 +84,10 @@ func assert<Value: Equatable, Action: Equatable>(initialValue: Value,
         
         step.update(&expected)
         XCTAssertEqual(state, expected, file: step.file, line: step.line)
+    }
+    
+    if !effects.isEmpty {
+        XCTFail("Action sent before handling \(effects.count) pending effect/s!", file: file, line: line)
     }
 }
 
