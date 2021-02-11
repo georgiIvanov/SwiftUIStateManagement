@@ -34,7 +34,7 @@ public func counterReducer(state: inout CounterState, action: CounterAction) -> 
     case .nthPrimeButtonTapped:
         state.isNthPrimeButtonDisabled = true
         return [
-            WebRequestsService().nthPrime(state.count)
+            currentEnv.nthPrime(state.count)
                 .map(CounterAction.nthPrimeResponse)
                 .receive(on: DispatchQueue.main)
                 .eraseToEffect()

@@ -1,7 +1,9 @@
 import ComposableArchitecture
 import SwiftUI
 import PlaygroundSupport
-import Counter
+@testable import Counter
+
+currentEnv = .mock
 
 PlaygroundPage.current.liveView = UIHostingController(
     rootView: CounterView(

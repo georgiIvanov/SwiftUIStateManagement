@@ -42,6 +42,7 @@
 		97754F7425BCB93A0099EDDC /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97754F7325BCB93A0099EDDC /* AppState.swift */; };
 		9778B03825D5143A00ABEEAC /* FavoritePrimesEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778B03725D5143A00ABEEAC /* FavoritePrimesEnvironment.swift */; };
 		9778B04425D5163300ABEEAC /* FileClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778B04325D5163300ABEEAC /* FileClient.swift */; };
+		9778B05025D5432F00ABEEAC /* CounterEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778B04F25D5432F00ABEEAC /* CounterEnvironment.swift */; };
 		9778CB0825BE0FC600E969CF /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB0725BE0FC600E969CF /* AppActions.swift */; };
 		9778CB1025BE28E400E969CF /* Reducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB0F25BE28E400E969CF /* Reducers.swift */; };
 		9778CB1525BE3E6000E969CF /* FavoritePrimesState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB1425BE3E6000E969CF /* FavoritePrimesState.swift */; };
@@ -216,6 +217,7 @@
 		97754F7825BCB9560099EDDC /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		9778B03725D5143A00ABEEAC /* FavoritePrimesEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePrimesEnvironment.swift; sourceTree = "<group>"; };
 		9778B04325D5163300ABEEAC /* FileClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileClient.swift; sourceTree = "<group>"; };
+		9778B04F25D5432F00ABEEAC /* CounterEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterEnvironment.swift; sourceTree = "<group>"; };
 		9778CB0225BE0C0300E969CF /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		9778CB0725BE0FC600E969CF /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		9778CB0F25BE28E400E969CF /* Reducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducers.swift; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 				97DD421725C764D10049FF78 /* CounterReducer.swift */,
 				97375DEA25C8B6FA007E9AC5 /* Counter.h */,
 				97375DEB25C8B6FA007E9AC5 /* Info.plist */,
+				9778B04F25D5432F00ABEEAC /* CounterEnvironment.swift */,
 			);
 			path = Counter;
 			sourceTree = "<group>";
@@ -954,6 +957,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9778B05025D5432F00ABEEAC /* CounterEnvironment.swift in Sources */,
 				97375E5025C8B77E007E9AC5 /* WolframAlphaResult.swift in Sources */,
 				97375E1E25C8B716007E9AC5 /* CounterReducer.swift in Sources */,
 				97375E1125C8B70A007E9AC5 /* CounterView.swift in Sources */,
