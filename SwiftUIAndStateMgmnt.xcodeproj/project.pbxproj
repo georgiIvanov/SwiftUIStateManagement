@@ -47,6 +47,8 @@
 		9778CB1025BE28E400E969CF /* Reducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB0F25BE28E400E969CF /* Reducers.swift */; };
 		9778CB1525BE3E6000E969CF /* FavoritePrimesState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB1425BE3E6000E969CF /* FavoritePrimesState.swift */; };
 		978F9D6925D343D000526762 /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978F9D6825D343D000526762 /* Effect.swift */; };
+		97937E4325D5C13500A65F91 /* ReducerAssert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97937E4225D5C13500A65F91 /* ReducerAssert.swift */; };
+		97937E4F25D5C1C000A65F91 /* Step.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97937E4E25D5C1C000A65F91 /* Step.swift */; };
 		97DD41E025C760AA0049FF78 /* ComposableArchitecture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD41D725C760AA0049FF78 /* ComposableArchitecture.framework */; };
 		97DD41E725C760AA0049FF78 /* ComposableArchitectureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97DD41E625C760AA0049FF78 /* ComposableArchitectureTests.swift */; };
 		97DD41E925C760AA0049FF78 /* ComposableArchitecture.h in Headers */ = {isa = PBXBuildFile; fileRef = 97DD41D925C760AA0049FF78 /* ComposableArchitecture.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -223,6 +225,8 @@
 		9778CB0F25BE28E400E969CF /* Reducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducers.swift; sourceTree = "<group>"; };
 		9778CB1425BE3E6000E969CF /* FavoritePrimesState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePrimesState.swift; sourceTree = "<group>"; };
 		978F9D6825D343D000526762 /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
+		97937E4225D5C13500A65F91 /* ReducerAssert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReducerAssert.swift; sourceTree = "<group>"; };
+		97937E4E25D5C1C000A65F91 /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
 		97DD41D725C760AA0049FF78 /* ComposableArchitecture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ComposableArchitecture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		97DD41D925C760AA0049FF78 /* ComposableArchitecture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposableArchitecture.h; sourceTree = "<group>"; };
 		97DD41DA25C760AA0049FF78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -385,6 +389,8 @@
 			children = (
 				97375DF725C8B6FB007E9AC5 /* CounterTests.swift */,
 				97375DF925C8B6FB007E9AC5 /* Info.plist */,
+				97937E4225D5C13500A65F91 /* ReducerAssert.swift */,
+				97937E4E25D5C1C000A65F91 /* Step.swift */,
 			);
 			path = CounterTests;
 			sourceTree = "<group>";
@@ -970,6 +976,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				97375DF825C8B6FB007E9AC5 /* CounterTests.swift in Sources */,
+				97937E4325D5C13500A65F91 /* ReducerAssert.swift in Sources */,
+				97937E4F25D5C1C000A65F91 /* Step.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
