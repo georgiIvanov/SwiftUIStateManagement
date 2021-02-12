@@ -8,10 +8,10 @@
 import Combine
 
 public typealias Reducer<Value, Action, Environment> = (inout Value, Action, Environment) -> [Effect<Action>]
+private typealias StoreReducer<Value, Action> = (inout Value, Action) -> [Effect<Action>]
 
 public class Store<Value, Action>: ObservableObject {
-    private let reducer: Reducer<Value, Action, Any>
-    private let environment: Any
+    private let reducer: StoreReducer<Value, Action>
     @Published public private(set) var value: Value
     private var storeUpdates: Cancellable?
     private var effectCancellables: Set<AnyCancellable> = []
@@ -19,16 +19,14 @@ public class Store<Value, Action>: ObservableObject {
     public init<Environment>(initialValue: Value,
                 reducer: @escaping Reducer<Value, Action, Environment>,
                 environment: Environment) {
-        // TODO: This can be improved but it works for now
-        self.reducer = { value, action, environment in
-            reducer(&value, action, environment as! Environment)
+        self.reducer = { value, action in
+            reducer(&value, action, environment)
         }
         self.value = initialValue
-        self.environment = environment
     }
     
     public func send(_ action: Action) {
-        let effects = reducer(&value, action, environment)
+        let effects = reducer(&value, action)
         effects.forEach { effect in
             
             var effectCancellable: AnyCancellable?
@@ -56,12 +54,12 @@ public class Store<Value, Action>: ObservableObject {
     ) -> Store<LocalValue, LocalAction> {
         let localStore = Store<LocalValue, LocalAction>(
             initialValue: toLocalValue(value),
-            reducer: { (localValue, localAction, localEnvironment) in
+            reducer: { (localValue, localAction, _) in
                 self.send(toGlobalAction(localAction))
                 localValue = toLocalValue(self.value)
                 return []
             },
-            environment: self.environment
+            environment: ()
         )
         
         localStore.storeUpdates = $value.sink { [weak localStore] (newValue) in
