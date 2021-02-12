@@ -9,6 +9,7 @@ import XCTest
 @testable import Counter
 import Combine
 import ComposableArchitecture
+import ComposableArchitectureTestSupport
 
 class CounterTests: XCTestCase {
     

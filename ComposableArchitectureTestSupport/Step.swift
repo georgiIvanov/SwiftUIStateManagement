@@ -7,19 +7,19 @@
 
 import Foundation
 
-enum StepType {
+public enum StepType {
     case send
     case receive
 }
 
-struct Step<Value, Action> {
+public struct Step<Value, Action> {
     let type: StepType
     let action: Action
     let update: (inout Value) -> Void
     let file: StaticString
     let line: UInt
     
-    init(
+    public init(
         _ type: StepType,
         _ action: Action,
         _ update: @escaping (inout Value) -> Void,

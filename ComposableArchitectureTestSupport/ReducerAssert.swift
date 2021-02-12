@@ -9,12 +9,14 @@ import Foundation
 import XCTest
 import ComposableArchitecture
 
-func assert<Value: Equatable, Action: Equatable, Environment>(initialValue: Value,
-            reducer: Reducer<Value, Action, Environment>,
-            environment: Environment,
-            steps: Step<Value, Action>...,
-            file: StaticString = #file,
-            line: UInt = #line) {
+public func assert<Value: Equatable,
+                   Action: Equatable,
+                   Environment>(initialValue: Value,
+                                reducer: Reducer<Value, Action, Environment>,
+                                environment: Environment,
+                                steps: Step<Value, Action>...,
+                                file: StaticString = #file,
+                                line: UInt = #line) {
     
     var state = initialValue
     var effects = [Effect<Action>]()
