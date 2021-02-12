@@ -12,6 +12,7 @@ import Counter
 // All the actions user can perform in the App
 enum AppAction: Equatable {
     case counterView(CounterViewAction)
+    case offlineCounterView(CounterViewAction)
     case favoritePrimes(FavoritePrimesAction)
 
     var favoritePrimes: FavoritePrimesAction? {
@@ -33,6 +34,17 @@ enum AppAction: Equatable {
         set {
             guard case .counterView = self, let newValue = newValue else { return }
             self = .counterView(newValue)
+        }
+    }
+    
+    var offlineCounterView: CounterViewAction? {
+        get {
+            guard case let .offlineCounterView(value) = self else { return nil }
+            return value
+        }
+        set {
+            guard case .offlineCounterView = self, let newValue = newValue else { return }
+            self = .offlineCounterView(newValue)
         }
     }
 }

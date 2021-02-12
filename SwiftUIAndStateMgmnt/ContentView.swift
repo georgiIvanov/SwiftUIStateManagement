@@ -22,6 +22,12 @@ struct ContentView: View {
                 )) {
                     Text("Counter demo")
                 }
+                NavigationLink(destination: CounterView(
+                    store: store.view(value: { $0.counterView },
+                                      action: { .offlineCounterView($0) })
+                )) {
+                    Text("Offline counter demo")
+                }
                 NavigationLink(destination: FavoritePrimesView(store: store.view(value: { $0.favoritePrimes },
                                                                                  action: { .favoritePrimes($0) }))
                 ) {

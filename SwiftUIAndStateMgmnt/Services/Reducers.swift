@@ -16,14 +16,17 @@ func activityFeed(
     return { state, action, environment in
         switch action {
         case .counterView(.counter),
+             .offlineCounterView(.counter),
              .favoritePrimes(.loadedFavoritePrimes),
              .favoritePrimes(.saveButtonTapped),
              .favoritePrimes(.loadButtonTapped):
             break
-        case .counterView(.primeModal(.removeFavoritePrimeTapped)):
+        case .counterView(.primeModal(.removeFavoritePrimeTapped)),
+             .offlineCounterView(.primeModal(.removeFavoritePrimeTapped)):
             state.activityFeed.append(.init(timestamp: Date(),
                                             type: .removedFavoritePrime(state.count)))
-        case .counterView(.primeModal(.saveFavoritePrimeTapped)):
+        case .counterView(.primeModal(.saveFavoritePrimeTapped)),
+             .offlineCounterView(.primeModal(.saveFavoritePrimeTapped)):
             state.activityFeed.append(.init(timestamp: Date(),
                                             type: .addedFavoritePrime(state.count)))
         case let .favoritePrimes(.deleteFavoritePrimes(indexSet)):
@@ -45,6 +48,10 @@ func createAppReducer() -> Reducer<AppState, AppAction, AppEnvironment> {
                  value: \.counterView,
                  action: \.counterView,
                  environment: { ($0.nthPrime, $0.log) } ),
+        pullback(counterViewReducer,
+                 value: \.counterView,
+                 action: \.offlineCounterView,
+                 environment: { ($0.offlineNthPrime, $0.log) } ),
         pullback(favoritePrimesReducer,
                  value: \.favoritePrimes,
                  action: \.favoritePrimes,

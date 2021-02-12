@@ -13,23 +13,26 @@ import ComposableArchitecture
 typealias AppEnvironment = (
     fileClient: FileClient,
     nthPrime: (Int) -> Effect<Int?>,
+    offlineNthPrime: (Int) -> Effect<Int?>,
     log: (String) -> Void
 )
 
 let liveEnvironment: AppEnvironment = {
     AppEnvironment(
-     fileClient: .live,
-     nthPrime: WebRequestsService.nthPrime,
-     log: { (toLog) in
-         print(toLog)
-     })
+        fileClient: .live,
+        nthPrime: WebRequestsService.nthPrime,
+        offlineNthPrime: WebRequestsService.offlineNthPrime,
+        log: { (toLog) in
+            print(toLog)
+        })
 }()
 
 var mockEnvironment: AppEnvironment = {
     AppEnvironment(
-     fileClient: .mock,
+        fileClient: .mock,
         nthPrime: { _ in .sync { 17 }},
-     log: { (toLog) in
-         print(toLog)
-     })
+        offlineNthPrime: WebRequestsService.offlineNthPrime,
+        log: { (toLog) in
+            print(toLog)
+        })
 }()
