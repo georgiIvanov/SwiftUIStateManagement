@@ -13,7 +13,7 @@ public struct CounterEnvironment {
     var log: (String) -> Void
 }
 
-extension CounterEnvironment {
+public extension CounterEnvironment {
     static let live = CounterEnvironment { (nthPrimeNumber) -> Effect<Int?> in
         return WebRequestsService().nthPrime(nthPrimeNumber)
     } log: { (valueToLog) in

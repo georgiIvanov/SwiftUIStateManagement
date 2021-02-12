@@ -11,9 +11,9 @@ import FavoritePrimes
 import Counter
 
 func activityFeed(
-    _ reducer: @escaping Reducer<AppState, AppAction>
-) -> Reducer<AppState, AppAction> {
-    return { state, action in
+    _ reducer: @escaping Reducer<AppState, AppAction, AppEnvironment>
+) -> Reducer<AppState, AppAction, AppEnvironment> {
+    return { state, action, environment in
         switch action {
         case .counterView(.counter),
              .favoritePrimes(.loadedFavoritePrimes),
@@ -34,16 +34,23 @@ func activityFeed(
             }
         }
         
-        return reducer(&state, action)
+        return reducer(&state, action, environment)
     }
 }
 
-func createAppReducer() -> (inout AppState, AppAction) -> [Effect<AppAction>] {
-    let reducer: (inout AppState, AppAction) -> [Effect<AppAction>] = combine(
-        pullback(counterViewReducer, value: \.counterView, action: \.counterView),
-        pullback(favoritePrimesReducer, value: \.favoritePrimes, action: \.favoritePrimes)
+func createAppReducer() -> Reducer<AppState, AppAction, AppEnvironment> {
+    
+    let reducer: Reducer<AppState, AppAction, AppEnvironment> = combine(
+        pullback(counterViewReducer,
+                 value: \.counterView,
+                 action: \.counterView,
+                 environment: { $0.counter } ),
+        pullback(favoritePrimesReducer,
+                 value: \.favoritePrimes,
+                 action: \.favoritePrimes,
+                 environment: { $0.favoritePrimes })
     )
     
-    return logging(activityFeed(reducer))
+    return logging(activityFeed(reducer), logger: { _ in { toLog in print(toLog) }})
 }
 

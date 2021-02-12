@@ -12,7 +12,7 @@ public struct FavoritePrimesEnvironment {
     var fileClient: FileClient
 }
 
-extension FavoritePrimesEnvironment {
+public extension FavoritePrimesEnvironment {
     static let live = FavoritePrimesEnvironment(fileClient: .live)
     
 #if DEBUG

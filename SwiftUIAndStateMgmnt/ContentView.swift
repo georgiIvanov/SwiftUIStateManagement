@@ -36,6 +36,7 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(store: Store<AppState, AppAction>(initialValue: AppState(),
-                                                      reducer: createAppReducer()))
+                                                      reducer: createAppReducer(),
+                                                      environment: AppEnvironment.mock))
     }
 }
