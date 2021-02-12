@@ -41,17 +41,20 @@ public func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction, LocalEn
 }
 
 public func logging<Value, Action, Environment>(
-    _ reducer: @escaping Reducer<Value, Action, Environment>
+    _ reducer: @escaping Reducer<Value, Action, Environment>,
+    logger: @escaping (Environment) -> (String) -> Void
 ) -> Reducer<Value, Action, Environment> {
     return { value, action, environment in
         let effects = reducer(&value, action, environment)
         let valueCopy = value
         
         return [.fireAndForget {
-            print("Action: \(action)")
-            print("Value:")
-            dump(valueCopy)
-            print("---\n")
+            let logFunc = logger(environment)
+            logFunc("Action: \(action)")
+            logFunc("Value:")
+            var dumpedValue = ""
+            dump(valueCopy, to: &dumpedValue)
+            logFunc("---\n")
         }] + effects
     }
 }
