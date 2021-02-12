@@ -23,7 +23,7 @@ public func favoritePrimesReducer(state: inout [Int],
         return []
     case .saveButtonTapped:
         return [environment.fileClient.save("favoritePrimes.json",
-                                        try! JSONEncoder().encode(state)).fireAndForget()]
+                                            try! JSONEncoder().encode(state)).fireAndForget()]
     case .loadButtonTapped:
         // TODO: Handle error
         return [environment.fileClient

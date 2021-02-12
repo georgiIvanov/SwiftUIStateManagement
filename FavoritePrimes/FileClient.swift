@@ -16,7 +16,7 @@ struct FileClient {
 }
 
 extension FileClient {
-    static let live = FileClient { (fileName) -> Effect<Data?> in
+    static let live = FileClient(load: { (fileName) -> Effect<Data?> in
         .sync {
             guard let data = try? Data(contentsOf: getFavoritePrimesUrl(fileName: fileName)),
                   let favoritePrimes = try? JSONDecoder().decode([Int].self, from: data) else {
@@ -25,12 +25,11 @@ extension FileClient {
             
             return data
         }
-    } save: { (fileName, data) -> Effect<Never> in
-        .fireAndForget {
-            let data = try! JSONEncoder().encode(data)
+    }, save: { (fileName, data) -> Effect<Never> in
+        .fireAndForget {            
             try! data.write(to: getFavoritePrimesUrl(fileName: fileName))
         }
-    }
+    })
 
     private static func getFavoritePrimesUrl(fileName: String) -> URL {
         let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory,
