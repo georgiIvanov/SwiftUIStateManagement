@@ -15,7 +15,7 @@ public struct FileClient {
     var save: (String, Data) -> Effect<Never>
 }
 
-extension FileClient {
+public extension FileClient {
     static let live = FileClient(load: { (fileName) -> Effect<Data?> in
         .sync {
             guard let data = try? Data(contentsOf: getFavoritePrimesUrl(fileName: fileName)),

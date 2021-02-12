@@ -8,18 +8,28 @@
 import Foundation
 import Counter
 import FavoritePrimes
+import ComposableArchitecture
 
-struct AppEnvironment {
-    var counter: CounterEnvironment
-    var favoritePrimes: FavoritePrimesEnvironment
-    
-    static let live: AppEnvironment = {
-        AppEnvironment(counter: .live, favoritePrimes: .live)
-    }()
-    
-#if DEBUG
-    static var mock: AppEnvironment = {
-        AppEnvironment(counter: .mock, favoritePrimes: .mock)
-    }()
-#endif
-}
+typealias AppEnvironment = (
+    fileClient: FileClient,
+    nthPrime: (Int) -> Effect<Int?>,
+    log: (String) -> Void
+)
+
+let liveEnvironment: AppEnvironment = {
+    AppEnvironment(
+     fileClient: .live,
+     nthPrime: WebRequestsService.nthPrime,
+     log: { (toLog) in
+         print(toLog)
+     })
+}()
+
+var mockEnvironment: AppEnvironment = {
+    AppEnvironment(
+     fileClient: .mock,
+        nthPrime: { _ in .sync { 17 }},
+     log: { (toLog) in
+         print(toLog)
+     })
+}()

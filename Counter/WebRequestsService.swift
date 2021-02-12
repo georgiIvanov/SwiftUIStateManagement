@@ -9,9 +9,13 @@ import Foundation
 import ComposableArchitecture
 import Combine
 
-class WebRequestsService {
+public class WebRequestsService {
     
     private let wolframAlphaApiKey = "GK6WPH-LWEH8AXQU4"
+    
+    public static let nthPrime: (Int) -> Effect<Int?> = { number in
+        return WebRequestsService().nthPrime(number)
+    }
     
     func nthPrime(_ n: Int) -> Effect<Int?> {
         wolframAlpha(query: "prime \(n)").map { result in

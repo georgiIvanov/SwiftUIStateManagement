@@ -44,11 +44,11 @@ func createAppReducer() -> Reducer<AppState, AppAction, AppEnvironment> {
         pullback(counterViewReducer,
                  value: \.counterView,
                  action: \.counterView,
-                 environment: { $0.counter } ),
+                 environment: { ($0.nthPrime, $0.log) } ),
         pullback(favoritePrimesReducer,
                  value: \.favoritePrimes,
                  action: \.favoritePrimes,
-                 environment: { $0.favoritePrimes })
+                 environment: { $0.fileClient })
     )
     
     return logging(activityFeed(reducer), logger: { _ in { toLog in print(toLog) }})

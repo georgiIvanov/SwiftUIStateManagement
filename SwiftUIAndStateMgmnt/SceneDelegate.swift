@@ -23,7 +23,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let appReducer = createAppReducer()
         let contentView = ContentView(store: Store(initialValue: AppState(),
                                                    reducer: appReducer,
-                                                   environment: AppEnvironment.live))
+                                                   environment: liveEnvironment)
+        )
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
