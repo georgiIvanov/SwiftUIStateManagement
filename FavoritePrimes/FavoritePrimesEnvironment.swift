@@ -8,7 +8,7 @@
 import Foundation
 import ComposableArchitecture
 
-struct FavoritePrimesEnvironment {
+public struct FavoritePrimesEnvironment {
     var fileClient: FileClient
 }
 
@@ -28,8 +28,3 @@ extension FavoritePrimesEnvironment {
     
 }
 
-#if DEBUG
-var currentEnv = FavoritePrimesEnvironment.live
-#else
-let currentEnv = FavoritePrimesEnvironment.live
-#endif
