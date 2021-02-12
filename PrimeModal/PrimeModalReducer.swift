@@ -14,7 +14,9 @@ public enum PrimeModalAction {
 }
 
 
-public func primeModalReducer(state: inout PrimeModalViewState, action: PrimeModalAction) -> [Effect<PrimeModalAction>] {
+public func primeModalReducer(state: inout PrimeModalViewState,
+                              action: PrimeModalAction,
+                              environment: Void) -> [Effect<PrimeModalAction>] {
     switch action {
     case .saveFavoritePrimeTapped:
         state.favoritePrimes.append(state.count)

@@ -63,6 +63,7 @@ struct IsPrimeModalView_Previews: PreviewProvider {
     static var previews: some View {
         IsPrimeModalView(store: Store(
                             initialValue: PrimeModalViewState(count: 0, favoritePrimes: []),
-                            reducer: primeModalReducer))
+                            reducer: primeModalReducer,
+                            environment: ()))
     }
 }
