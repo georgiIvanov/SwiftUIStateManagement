@@ -8,7 +8,7 @@
 import Foundation
 import ComposableArchitecture
 
-struct FileClient {
+public struct FileClient {
     var load: (String) -> Effect<Data?>
     
     /// We want an effect that can never produce a value and send an action back to the system

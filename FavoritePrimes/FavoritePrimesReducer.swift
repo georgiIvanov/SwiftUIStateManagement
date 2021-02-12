@@ -22,11 +22,11 @@ public func favoritePrimesReducer(state: inout [Int],
         state = favoritePrimes
         return []
     case .saveButtonTapped:
-        return [environment.fileClient.save("favoritePrimes.json",
-                                            try! JSONEncoder().encode(state)).fireAndForget()]
+        return [environment.save("favoritePrimes.json",
+                                 try! JSONEncoder().encode(state)).fireAndForget()]
     case .loadButtonTapped:
         // TODO: Handle error
-        return [environment.fileClient
+        return [environment
                     .load("favoritePrimes.json")
                     .compactMap { $0 }
                     .decode(type: [Int].self, decoder: JSONDecoder())

@@ -3,8 +3,7 @@ import SwiftUI
 import PlaygroundSupport
 @testable import Counter
 
-var environment = CounterEnvironment.mock
-environment.nthPrime = { _ in .sync { 176498261 } }
+var environment = (mockNthPrime, mockLog)
 
 PlaygroundPage.current.liveView = UIHostingController(
     rootView: CounterView(

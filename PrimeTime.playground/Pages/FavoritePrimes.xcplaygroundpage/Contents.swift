@@ -6,7 +6,7 @@ import PrimeModal
 import Counter
 
 var environment = FavoritePrimesEnvironment.mock
-environment.fileClient.load = { _ in
+environment.load = { _ in
     Effect.sync { try! JSONEncoder().encode(Array(1...10)) }
 }
 
