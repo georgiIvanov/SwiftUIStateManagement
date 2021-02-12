@@ -51,6 +51,10 @@ func createAppReducer() -> Reducer<AppState, AppAction, AppEnvironment> {
                  environment: { $0.fileClient })
     )
     
-    return logging(activityFeed(reducer), logger: { _ in { toLog in print(toLog) }})
+    // Using logger on integration tests causes them to fail
+    // there are effects froduced and assert is not equipped to handle them
+    // TODO: remove logging in unit tests - https://stackoverflow.com/questions/27500940/how-to-let-the-app-know-if-its-running-unit-tests-in-a-pure-swift-project
+//    logging(activityFeed(reducer), logger: { _ in { toLog in print(toLog) }})
+    return activityFeed(reducer)
 }
 

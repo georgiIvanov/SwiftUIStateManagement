@@ -22,7 +22,7 @@ public struct Step<Value, Action> {
     public init(
         _ type: StepType,
         _ action: Action,
-        _ update: @escaping (inout Value) -> Void,
+        _ update: @escaping (inout Value) -> Void = { _ in },
         file: StaticString = #file,
         line: UInt = #line
     ) {

@@ -10,7 +10,7 @@ import FavoritePrimes
 import Counter
 
 // All the actions user can perform in the App
-enum AppAction {
+enum AppAction: Equatable {
     case counterView(CounterViewAction)
     case favoritePrimes(FavoritePrimesAction)
 
