@@ -8,24 +8,23 @@
 import Foundation
 import ComposableArchitecture
 
-struct CounterEnvironment {
+public struct CounterEnvironment {
     var nthPrime: (Int) -> Effect<Int?>
+    var log: (String) -> Void
 }
 
 extension CounterEnvironment {
     static let live = CounterEnvironment { (nthPrimeNumber) -> Effect<Int?> in
         return WebRequestsService().nthPrime(nthPrimeNumber)
+    } log: { (valueToLog) in
+        print(valueToLog)
     }
     
 #if DEBUG
     static let mock = CounterEnvironment { (nthPrimeNumber) -> Effect<Int?> in
         .sync { 17 }
+    } log: { (valueToLog) in
+        print(valueToLog)
     }
 #endif
 }
-
-#if DEBUG
-var currentEnv = CounterEnvironment.live
-#else
-let currentEnv = CounterEnvironment.live
-#endif

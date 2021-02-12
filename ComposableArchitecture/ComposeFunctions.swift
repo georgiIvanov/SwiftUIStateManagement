@@ -54,6 +54,7 @@ public func logging<Value, Action, Environment>(
             logFunc("Value:")
             var dumpedValue = ""
             dump(valueCopy, to: &dumpedValue)
+            logFunc(dumpedValue)
             logFunc("---\n")
         }] + effects
     }
