@@ -47,6 +47,4 @@ public func counterReducer(state: inout CounterState, action: CounterAction) -> 
         state.alertNthPrime = nil
         return []
     }
-    
-    
 }
