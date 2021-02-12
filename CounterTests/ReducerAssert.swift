@@ -9,8 +9,9 @@ import Foundation
 import XCTest
 import ComposableArchitecture
 
-func assert<Value: Equatable, Action: Equatable>(initialValue: Value,
-            reducer: Reducer<Value, Action>,
+func assert<Value: Equatable, Action: Equatable, Environment>(initialValue: Value,
+            reducer: Reducer<Value, Action, Environment>,
+            environment: Environment,
             steps: Step<Value, Action>...,
             file: StaticString = #file,
             line: UInt = #line) {
@@ -25,7 +26,7 @@ func assert<Value: Equatable, Action: Equatable>(initialValue: Value,
             if !effects.isEmpty {
                 XCTFail("Action sent before handling \(effects.count) pending effect/s!", file: step.file, line: step.line)
             }
-            effects.append(contentsOf: reducer(&state, step.action))
+            effects.append(contentsOf: reducer(&state, step.action, environment))
         case .receive:
             guard !effects.isEmpty else {
                 XCTFail("No pending effects to receive from.", file: step.file, line: step.line)
@@ -51,7 +52,7 @@ func assert<Value: Equatable, Action: Equatable>(initialValue: Value,
             }
             
             XCTAssertEqual(action, step.action, file: step.file, line: step.line)
-            effects.append(contentsOf: reducer(&state, step.action))
+            effects.append(contentsOf: reducer(&state, step.action, environment))
         }
         
         step.update(&expected)

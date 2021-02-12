@@ -12,12 +12,13 @@ class FavoritePrimesTests: XCTestCase {
     
     override class func setUp() {
         super.setUp()
-        currentEnv = FavoritePrimesEnvironment.mock
     }
     
     func testDeleteFavoritePrimes() throws {
         var state = [2, 3, 5, 7]
-        let effects = favoritePrimesReducer(state: &state, action: .deleteFavoritePrimes([2]))
+        let effects = favoritePrimesReducer(state: &state,
+                                            action: .deleteFavoritePrimes([2]),
+                                            environment: .mock)
         
         XCTAssertEqual(state, [2, 3, 7])
         XCTAssertTrue(effects.isEmpty)
@@ -25,7 +26,9 @@ class FavoritePrimesTests: XCTestCase {
     
     func testSaveButtonTapped() throws {
         var didSave = false
-        currentEnv.fileClient.save = { _, data in
+        var environment = FileClient.mock
+        
+        environment.save = { _, data in
             // TODO: Verify that data was encoded correctly to strenghten test
             .fireAndForget {
                 didSave = true
@@ -33,7 +36,9 @@ class FavoritePrimesTests: XCTestCase {
         }
         
         var state = [2, 3, 5, 7]
-        let effects = favoritePrimesReducer(state: &state, action: .saveButtonTapped)
+        let effects = favoritePrimesReducer(state: &state,
+                                            action: .saveButtonTapped,
+                                            environment: environment)
         
         XCTAssertEqual(state, [2, 3, 5, 7])
         XCTAssertEqual(effects.count, 1)
@@ -49,15 +54,18 @@ class FavoritePrimesTests: XCTestCase {
     
     func testLoadFavoritePrimesFlow() throws {
         let loadPrimes = [2, 31]
+        var environment = FileClient.mock
         
-        currentEnv.fileClient.load = { _ in
+        environment.load = { _ in
             .sync {
                 return try! JSONEncoder().encode(loadPrimes)
             }
         }
         
         var state = [2, 3, 5, 7]
-        var effects = favoritePrimesReducer(state: &state, action: .loadButtonTapped)
+        var effects = favoritePrimesReducer(state: &state,
+                                            action: .loadButtonTapped,
+                                            environment: environment)
         
         XCTAssertEqual(state, [2, 3, 5, 7])
         XCTAssertEqual(effects.count, 1)
@@ -75,7 +83,9 @@ class FavoritePrimesTests: XCTestCase {
             nextAction = action
         })
         
-        effects = favoritePrimesReducer(state: &state, action: nextAction)
+        effects = favoritePrimesReducer(state: &state,
+                                        action: nextAction,
+                                        environment: environment)
         
         XCTAssertEqual(state, loadPrimes)
         XCTAssert(effects.isEmpty)
