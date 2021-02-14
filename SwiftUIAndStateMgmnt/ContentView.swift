@@ -28,7 +28,7 @@ struct ContentView: View {
                 )) {
                     Text("Offline counter demo")
                 }
-                NavigationLink(destination: FavoritePrimesView(store: store.view(value: { $0.favoritePrimes },
+                NavigationLink(destination: FavoritePrimesView(store: store.view(value: { $0.favoritePrimesState },
                                                                                  action: { .favoritePrimes($0) }))
                 ) {
                     Text("Favorite primes")

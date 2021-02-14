@@ -9,6 +9,8 @@ import Foundation
 import Combine
 import PrimeModal
 import Counter
+import PrimeAlert
+import FavoritePrimes
 
 struct AppState: Equatable {
     var count = 0
@@ -38,13 +40,11 @@ struct AppState: Equatable {
 extension AppState {
     var favoritePrimesState: FavoritePrimesState {
         get {
-            return FavoritePrimesState(favoritePrimes: favoritePrimes,
-                                       activityFeed: activityFeed)
+            return (alertNthPrime, favoritePrimes)
         }
         
         set {
-            favoritePrimes = newValue.favoritePrimes
-            activityFeed = newValue.activityFeed
+            (alertNthPrime, favoritePrimes) = newValue
         }
     }
     

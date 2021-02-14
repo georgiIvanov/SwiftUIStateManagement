@@ -19,7 +19,10 @@ func activityFeed(
              .offlineCounterView(.counter),
              .favoritePrimes(.loadedFavoritePrimes),
              .favoritePrimes(.saveButtonTapped),
-             .favoritePrimes(.loadButtonTapped):
+             .favoritePrimes(.loadButtonTapped),
+             .favoritePrimes(.primeButtonWasTapped(_)),
+             .favoritePrimes(.nthPrimeResponse(_, _)),
+             .favoritePrimes(.alertDismissButtonTapped):
             break
         case .counterView(.primeModal(.removeFavoritePrimeTapped)),
              .offlineCounterView(.primeModal(.removeFavoritePrimeTapped)):
@@ -53,9 +56,9 @@ func createAppReducer() -> Reducer<AppState, AppAction, AppEnvironment> {
                  action: \.offlineCounterView,
                  environment: { ($0.offlineNthPrime, $0.log) } ),
         pullback(favoritePrimesReducer,
-                 value: \.favoritePrimes,
+                 value: \.favoritePrimesState,
                  action: \.favoritePrimes,
-                 environment: { $0.fileClient })
+                 environment: { ($0.fileClient, $0.nthPrime) })
     )
     
     // Using logger on integration tests causes them to fail

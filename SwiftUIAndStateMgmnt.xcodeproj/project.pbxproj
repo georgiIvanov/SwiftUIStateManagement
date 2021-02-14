@@ -44,7 +44,6 @@
 		9778B05025D5432F00ABEEAC /* CounterEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778B04F25D5432F00ABEEAC /* CounterEnvironment.swift */; };
 		9778CB0825BE0FC600E969CF /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB0725BE0FC600E969CF /* AppActions.swift */; };
 		9778CB1025BE28E400E969CF /* Reducers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB0F25BE28E400E969CF /* Reducers.swift */; };
-		9778CB1525BE3E6000E969CF /* FavoritePrimesState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9778CB1425BE3E6000E969CF /* FavoritePrimesState.swift */; };
 		978F9D6925D343D000526762 /* Effect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 978F9D6825D343D000526762 /* Effect.swift */; };
 		97A2301525D6C6660063C280 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A2301425D6C6660063C280 /* AppEnvironment.swift */; };
 		97A2302925D6F8460063C280 /* ComposableArchitectureTestSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 97A2302725D6F8460063C280 /* ComposableArchitectureTestSupport.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -227,7 +226,6 @@
 		9778CB0225BE0C0300E969CF /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		9778CB0725BE0FC600E969CF /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		9778CB0F25BE28E400E969CF /* Reducers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducers.swift; sourceTree = "<group>"; };
-		9778CB1425BE3E6000E969CF /* FavoritePrimesState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePrimesState.swift; sourceTree = "<group>"; };
 		978F9D6825D343D000526762 /* Effect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Effect.swift; sourceTree = "<group>"; };
 		97937E4225D5C13500A65F91 /* ReducerAssert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReducerAssert.swift; sourceTree = "<group>"; };
 		97937E4E25D5C1C000A65F91 /* Step.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Step.swift; sourceTree = "<group>"; };
@@ -432,7 +430,6 @@
 			isa = PBXGroup;
 			children = (
 				97754F7325BCB93A0099EDDC /* AppState.swift */,
-				9778CB1425BE3E6000E969CF /* FavoritePrimesState.swift */,
 				9778CB0725BE0FC600E969CF /* AppActions.swift */,
 			);
 			path = Models;
@@ -1113,7 +1110,6 @@
 				97754F4125BCB9190099EDDC /* AppDelegate.swift in Sources */,
 				97754F4325BCB9190099EDDC /* SceneDelegate.swift in Sources */,
 				97754F4525BCB9190099EDDC /* ContentView.swift in Sources */,
-				9778CB1525BE3E6000E969CF /* FavoritePrimesState.swift in Sources */,
 				9778CB1025BE28E400E969CF /* Reducers.swift in Sources */,
 				97A2301525D6C6660063C280 /* AppEnvironment.swift in Sources */,
 				97754F7425BCB93A0099EDDC /* AppState.swift in Sources */,
