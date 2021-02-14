@@ -8,13 +8,7 @@
 import SwiftUI
 import ComposableArchitecture
 import PrimeModal
-
-public struct PrimeAlert: Identifiable, Equatable {
-    let prime: Int
-    public var id: Int {
-        self.prime
-    }
-}
+import PrimeAlert
 
 public typealias CounterState = (
     alertNthPrime: PrimeAlert?,
@@ -121,7 +115,7 @@ public struct CounterView: View {
         .navigationTitle("Counter demo")
         .alert(item: .constant(store.value.alertNthPrime),
                content: { (item: PrimeAlert) -> Alert in
-                Alert(title: Text("The \(ordinal(store.value.count)) prime is \(item.prime)"),
+                Alert(title: Text(item.title),
                       dismissButton: .default(Text("Ok"), action: { self.store.send(.counter(.alertDismissButtonTapped)) }))
         })
         .sheet(isPresented: self.$isPrimeModalShown) {
@@ -136,8 +130,3 @@ public struct CounterView: View {
     }
 }
 
-private func ordinal(_ n: Int) -> String {
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .ordinal
-    return formatter.string(for: n) ?? ""
-}

@@ -9,6 +9,7 @@ import Foundation
 import ComposableArchitecture
 import PrimeModal
 import Combine
+import PrimeAlert
 
 public enum CounterAction: Equatable {
     case decrTapped
@@ -48,7 +49,7 @@ public func counterReducer(state: inout CounterState,
                 .eraseToEffect()
         ]
     case let .nthPrimeResponse(prime):
-        state.alertNthPrime = prime.map(PrimeAlert.init)
+        state.alertNthPrime = prime.map { PrimeAlert.init(n: state.count, prime: $0) }
         state.isNthPrimeButtonDisabled = false
         return []
     case .alertDismissButtonTapped:
