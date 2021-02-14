@@ -18,17 +18,22 @@ public class WebRequestsService {
     }
     
     public static let offlineNthPrime: (Int) -> Effect<Int?> = { n in
-        Future { callback in
-            var nthPrime = 1
-            var count = 0
-            while count <= n {
-                nthPrime += 1
-                if isPrime(nthPrime) {
-                    count += 1
+        Deferred {
+            Future { callback in
+                var nthPrime = 1
+                var count = 0
+                while count <= n {
+                    nthPrime += 1
+                    if isPrime(nthPrime) {
+                        count += 1
+                    }
                 }
+                callback(.success(nthPrime))
             }
-            callback(.success(nthPrime))
-        }.eraseToEffect()
+        }
+        .subscribe(on: DispatchQueue.global())
+        .receive(on: DispatchQueue.main)
+        .eraseToEffect()
     }
     
     private static func isPrime(_ p: Int) -> Bool {
@@ -43,10 +48,10 @@ public class WebRequestsService {
     
     func nthPrime(_ n: Int) -> Effect<Int?> {
         wolframAlpha(query: "prime \(n)").map { result in
-          result.flatMap {
-              $0.queryresult.pods
-                .first(where: { $0.primary == .some(true) })?
-                .subpods.first?.plaintext
+            result.flatMap {
+                $0.queryresult.pods
+                    .first(where: { $0.primary == .some(true) })?
+                    .subpods.first?.plaintext
             }
             .flatMap(Int.init)
         }.eraseToEffect()
