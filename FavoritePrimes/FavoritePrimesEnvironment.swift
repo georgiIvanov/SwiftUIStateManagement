@@ -8,9 +8,10 @@
 import Foundation
 import ComposableArchitecture
 
-// In the future when more dependencies are added we can turn this into a tuple
-// = (fileClient: FileClient, x: X...)
-public typealias FavoritePrimesEnvironment = FileClient
+public typealias FavoritePrimesEnvironment = (
+    fileClient: FileClient,
+    nthPrime: (Int) -> Effect<Int?>
+)
 
 #if DEBUG
 public extension FileClient {
