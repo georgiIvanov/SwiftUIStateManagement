@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import CasePaths
 
 public func combine<Value, Action, Environment>(
     _ reducers: Reducer<Value, Action, Environment>...
@@ -20,21 +21,17 @@ public func combine<Value, Action, Environment>(
 public func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction, LocalEnvironment, GlobalEnvironment>(
     _ reducer: @escaping Reducer<LocalValue, LocalAction, LocalEnvironment>,
     value: WritableKeyPath<GlobalValue, LocalValue>,
-    action: WritableKeyPath<GlobalAction, LocalAction?>,
+    action: CasePath<GlobalAction, LocalAction>,
     environment: @escaping (GlobalEnvironment) -> LocalEnvironment
 ) -> Reducer<GlobalValue, GlobalAction, GlobalEnvironment> {
     return { globalValue, globalAction, globalEnvironment in
-        guard let localAction = globalAction[keyPath: action] else {
+        guard let localAction = action.extract(from: globalAction) else {
             return []
         }
         
         let localEffects = reducer(&globalValue[keyPath: value], localAction, environment(globalEnvironment))
         return localEffects.map { localEffect in
-            localEffect.map { localAction in
-                var globalAction = globalAction
-                    globalAction[keyPath: action] = localAction
-                    return globalAction
-            }
+            localEffect.map(action.embed)
             .eraseToEffect()
         }
     }
