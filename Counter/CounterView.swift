@@ -97,7 +97,7 @@ public struct CounterView: View {
                       dismissButton: .default(Text("Ok"), action: { self.store.send(.counter(.alertDismissButtonTapped)) }))
         })
         .sheet(isPresented: self.$isPrimeModalShown) {
-            IsPrimeModalView(store: store.view(value: { $0.primeModalViewState },
+            IsPrimeModalView(store: store.scope(value: { $0.primeModalViewState },
                                                action: { .primeModal($0) }))
         }
         

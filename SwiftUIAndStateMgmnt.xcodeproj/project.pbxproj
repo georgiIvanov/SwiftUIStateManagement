@@ -31,6 +31,7 @@
 		9773885425D9D814009477C1 /* PrimeAlert.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97D7552D25D9CC4700FE18A5 /* PrimeAlert.framework */; };
 		9773885525D9D81D009477C1 /* PrimeAlert.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97D7552D25D9CC4700FE18A5 /* PrimeAlert.framework */; };
 		977388AE25DACD92009477C1 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 977388AD25DACD92009477C1 /* CasePaths */; };
+		977388E225DAFAB5009477C1 /* ViewStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977388E125DAFAB5009477C1 /* ViewStore.swift */; };
 		97754F4125BCB9190099EDDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97754F4025BCB9190099EDDC /* AppDelegate.swift */; };
 		97754F4325BCB9190099EDDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97754F4225BCB9190099EDDC /* SceneDelegate.swift */; };
 		97754F4525BCB9190099EDDC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97754F4425BCB9190099EDDC /* ContentView.swift */; };
@@ -205,6 +206,7 @@
 		973A52BE25BCCB50004BD18A /* IsPrimeModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsPrimeModalView.swift; sourceTree = "<group>"; };
 		973A52C425BCD266004BD18A /* WolframAlphaResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WolframAlphaResult.swift; sourceTree = "<group>"; };
 		973A52CD25BCD31C004BD18A /* WebRequestsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRequestsService.swift; sourceTree = "<group>"; };
+		977388E125DAFAB5009477C1 /* ViewStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStore.swift; sourceTree = "<group>"; };
 		97754F3D25BCB9190099EDDC /* SwiftUIAndStateMgmnt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUIAndStateMgmnt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97754F4025BCB9190099EDDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		97754F4225BCB9190099EDDC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -555,6 +557,7 @@
 			isa = PBXGroup;
 			children = (
 				9778CB0225BE0C0300E969CF /* Store.swift */,
+				977388E125DAFAB5009477C1 /* ViewStore.swift */,
 				978F9D6825D343D000526762 /* Effect.swift */,
 				97DD420125C7610A0049FF78 /* ComposeFunctions.swift */,
 				97DD41D925C760AA0049FF78 /* ComposableArchitecture.h */,
@@ -1164,6 +1167,7 @@
 			files = (
 				978F9D6925D343D000526762 /* Effect.swift in Sources */,
 				97DD420225C7610A0049FF78 /* ComposeFunctions.swift in Sources */,
+				977388E225DAFAB5009477C1 /* ViewStore.swift in Sources */,
 				97DD41FA25C760DA0049FF78 /* Store.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

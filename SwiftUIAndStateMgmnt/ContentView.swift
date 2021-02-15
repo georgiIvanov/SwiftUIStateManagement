@@ -17,18 +17,18 @@ struct ContentView: View {
         NavigationView {
             List {
                 NavigationLink(destination: CounterView(
-                    store: store.view(value: { $0.counterView },
+                    store: store.scope(value: { $0.counterView },
                                       action: { .counterView($0) })
                 )) {
                     Text("Counter demo")
                 }
                 NavigationLink(destination: CounterView(
-                    store: store.view(value: { $0.counterView },
+                    store: store.scope(value: { $0.counterView },
                                       action: { .offlineCounterView($0) })
                 )) {
                     Text("Offline counter demo")
                 }
-                NavigationLink(destination: FavoritePrimesView(store: store.view(value: { $0.favoritePrimesState },
+                NavigationLink(destination: FavoritePrimesView(store: store.scope(value: { $0.favoritePrimesState },
                                                                                  action: { .favoritePrimes($0) }))
                 ) {
                     Text("Favorite primes")

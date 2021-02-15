@@ -10,9 +10,9 @@ import Combine
 public typealias Reducer<Value, Action, Environment> = (inout Value, Action, Environment) -> [Effect<Action>]
 private typealias StoreReducer<Value, Action> = (inout Value, Action) -> [Effect<Action>]
 
-public class Store<Value, Action>: ObservableObject {
+public class Store<Value, Action> {
     private let reducer: StoreReducer<Value, Action>
-    @Published public private(set) var value: Value
+    @Published fileprivate var value: Value
     private var storeUpdates: Cancellable?
     private var effectCancellables: Set<AnyCancellable> = []
     
@@ -49,7 +49,7 @@ public class Store<Value, Action>: ObservableObject {
     }
     
     /// Convert a store that understands global values and actions into a store that understands local values and actions
-    public func view<LocalValue, LocalAction>(
+    public func scope<LocalValue, LocalAction>(
         value toLocalValue: @escaping (Value) -> LocalValue,
         action toGlobalAction: @escaping (LocalAction) -> Action
     ) -> Store<LocalValue, LocalAction> {
@@ -63,10 +63,32 @@ public class Store<Value, Action>: ObservableObject {
             environment: ()
         )
         
-        localStore.storeUpdates = $value.sink { [weak localStore] (newValue) in
-            localStore?.value = toLocalValue(newValue)
-        }
+        localStore.storeUpdates = $value
+            .map(toLocalValue)
+            .sink { [weak localStore] (newValue) in
+                localStore?.value = newValue
+            }
         
         return localStore
+    }
+}
+
+public extension Store where Value: Equatable {
+    var view: ViewStore<Value> {
+        self.view(removeDuplicates: ==)
+    }
+}
+
+public extension Store {
+    func view(removeDuplicates predicate: @escaping (Value, Value) -> Bool) -> ViewStore<Value> {
+        let viewStore = ViewStore(initialValue: self.value)
+        
+        viewStore.storeUpdate = $value
+            .removeDuplicates(by: predicate)
+            .sink { [weak viewStore] (value) in
+                viewStore?.value = value
+            }
+        
+        return viewStore
     }
 }
