@@ -17,7 +17,7 @@ private func isPrime (_ p: Int) -> Bool {
   return true
 }
 
-public struct PrimeModalViewState {
+public struct PrimeModalViewState: Equatable {
     public var count: Int
     public var favoritePrimes:  [Int]
     
@@ -28,17 +28,19 @@ public struct PrimeModalViewState {
 }
 
 public struct IsPrimeModalView: View {
-    @ObservedObject var store: Store<PrimeModalViewState, PrimeModalAction>
+    let store: Store<PrimeModalViewState, PrimeModalAction>
+    let viewStore: ViewStore<PrimeModalViewState>
     
     public init(store: Store<PrimeModalViewState, PrimeModalAction>) {
         self.store = store
+        self.viewStore = store.view
     }
     
     public var body: some View {
         VStack {
-            if isPrime(store.value.count) {
-                Text("\(store.value.count) is prime 🎉")
-                if store.value.favoritePrimes.contains(store.value.count) {
+            if isPrime(viewStore.value.count) {
+                Text("\(viewStore.value.count) is prime 🎉")
+                if viewStore.value.favoritePrimes.contains(viewStore.value.count) {
                     Button(action: {
                         store.send(.removeFavoritePrimeTapped)
                     }, label: {
@@ -52,7 +54,7 @@ public struct IsPrimeModalView: View {
                     })
                 }
             } else {
-                Text("\(store.value.count) is not prime :(")
+                Text("\(viewStore.value.count) is not prime :(")
             }
         }
         

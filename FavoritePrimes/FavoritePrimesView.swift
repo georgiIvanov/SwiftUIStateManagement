@@ -32,15 +32,17 @@ public enum FavoritePrimesAction: Equatable {
 }
 
 public struct FavoritePrimesView: View {
-    @ObservedObject var store: Store<FavoritePrimesState, FavoritePrimesAction>
+    let store: Store<FavoritePrimesState, FavoritePrimesAction>
+    @ObservedObject var viewStore: ViewStore<FavoritePrimesState>
     
     public init(store: Store<FavoritePrimesState, FavoritePrimesAction>) {
         self.store = store
+        self.viewStore = store.view(removeDuplicates: ==)
     }
     
     public var body: some View {
         List {
-            ForEach(store.value.favoritePrimes, id: \.self) { prime in
+            ForEach(viewStore.value.favoritePrimes, id: \.self) { prime in
                 Button("\(prime)") {
                     self.store.send(.primeButtonWasTapped(prime))
                 }
@@ -59,7 +61,7 @@ public struct FavoritePrimesView: View {
                     store.send(.loadButtonTapped)
                 }
             })
-        .alert(item: .constant(self.store.value.alertNthPrime), content: { (prime) -> Alert in
+        .alert(item: .constant(viewStore.value.alertNthPrime), content: { (prime) -> Alert in
             Alert(title: Text(prime.title),
                   dismissButton: .default(Text("Ok"), action: {
                     self.store.send(.alertDismissButtonTapped)
