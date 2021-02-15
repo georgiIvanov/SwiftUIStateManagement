@@ -10,6 +10,7 @@ import ComposableArchitecture
 import PrimeModal
 import Combine
 import PrimeAlert
+import CasePaths
 
 public enum CounterAction: Equatable {
     case decrTapped
@@ -22,11 +23,11 @@ public enum CounterAction: Equatable {
 public let counterViewReducer: Reducer<CounterViewState, CounterViewAction, CounterEnvironment> = combine(
     pullback(counterReducer,
              value: \CounterViewState.counter,
-             action: \CounterViewAction.counter,
+             action: /CounterViewAction.counter,
              environment: { $0 }),
     pullback(primeModalReducer,
              value: \.primeModalViewState,
-             action: \.primeModal,
+             action: /CounterViewAction.primeModal,
              environment: { _ in () })
 )
 
