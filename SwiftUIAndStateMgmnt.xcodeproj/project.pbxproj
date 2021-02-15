@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -30,6 +30,7 @@
 		97375E8725C8B905007E9AC5 /* PrimeModal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97375D9C25C8AF77007E9AC5 /* PrimeModal.framework */; };
 		9773885425D9D814009477C1 /* PrimeAlert.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97D7552D25D9CC4700FE18A5 /* PrimeAlert.framework */; };
 		9773885525D9D81D009477C1 /* PrimeAlert.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97D7552D25D9CC4700FE18A5 /* PrimeAlert.framework */; };
+		977388AE25DACD92009477C1 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 977388AD25DACD92009477C1 /* CasePaths */; };
 		97754F4125BCB9190099EDDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97754F4025BCB9190099EDDC /* AppDelegate.swift */; };
 		97754F4325BCB9190099EDDC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97754F4225BCB9190099EDDC /* SceneDelegate.swift */; };
 		97754F4525BCB9190099EDDC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97754F4425BCB9190099EDDC /* ContentView.swift */; };
@@ -339,6 +340,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				977388AE25DACD92009477C1 /* CasePaths in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -843,6 +845,9 @@
 			dependencies = (
 			);
 			name = ComposableArchitecture;
+			packageProductDependencies = (
+				977388AD25DACD92009477C1 /* CasePaths */,
+			);
 			productName = ComposableArchitecture;
 			productReference = 97DD41D725C760AA0049FF78 /* ComposableArchitecture.framework */;
 			productType = "com.apple.product-type.framework";
@@ -928,6 +933,9 @@
 				Base,
 			);
 			mainGroup = 97754F3425BCB9190099EDDC;
+			packageReferences = (
+				977388AC25DACD92009477C1 /* XCRemoteSwiftPackageReference "swift-case-paths" */,
+			);
 			productRefGroup = 97754F3E25BCB9190099EDDC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2096,6 +2104,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		977388AC25DACD92009477C1 /* XCRemoteSwiftPackageReference "swift-case-paths" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-case-paths";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		977388AD25DACD92009477C1 /* CasePaths */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 977388AC25DACD92009477C1 /* XCRemoteSwiftPackageReference "swift-case-paths" */;
+			productName = CasePaths;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 97754F3525BCB9190099EDDC /* Project object */;
 }
