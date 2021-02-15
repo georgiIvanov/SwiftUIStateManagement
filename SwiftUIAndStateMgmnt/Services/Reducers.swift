@@ -9,6 +9,7 @@ import Foundation
 import ComposableArchitecture
 import FavoritePrimes
 import Counter
+import CasePaths
 
 func activityFeed(
     _ reducer: @escaping Reducer<AppState, AppAction, AppEnvironment>
@@ -49,15 +50,15 @@ func createAppReducer() -> Reducer<AppState, AppAction, AppEnvironment> {
     let reducer: Reducer<AppState, AppAction, AppEnvironment> = combine(
         pullback(counterViewReducer,
                  value: \.counterView,
-                 action: \.counterView,
+                 action: /AppAction.counterView,
                  environment: { ($0.nthPrime, $0.log) } ),
         pullback(counterViewReducer,
                  value: \.counterView,
-                 action: \.offlineCounterView,
+                 action: /AppAction.offlineCounterView,
                  environment: { ($0.offlineNthPrime, $0.log) } ),
         pullback(favoritePrimesReducer,
                  value: \.favoritePrimesState,
-                 action: \.favoritePrimes,
+                 action: /AppAction.favoritePrimes,
                  environment: { ($0.fileClient, $0.nthPrime) })
     )
     
