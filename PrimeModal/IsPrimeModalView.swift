@@ -29,7 +29,7 @@ public struct PrimeModalViewState: Equatable {
 
 public struct IsPrimeModalView: View {
     let store: Store<PrimeModalViewState, PrimeModalAction>
-    let viewStore: ViewStore<PrimeModalViewState>
+    @ObservedObject var viewStore: ViewStore<PrimeModalViewState>
     
     public init(store: Store<PrimeModalViewState, PrimeModalAction>) {
         self.store = store
