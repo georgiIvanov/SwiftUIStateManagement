@@ -19,6 +19,7 @@ struct AppState: Equatable {
     var activityFeed: [Activity] = []
     var alertNthPrime: PrimeAlert?
     var isNthPrimeButtonDisabled: Bool = false
+    var isPrimeModalShown: Bool = false
     
     struct Activity: Equatable {
         let timestamp: Date
@@ -53,6 +54,7 @@ extension AppState {
             return CounterFeatureState(count: self.count,
                                     favoritePrimes: self.favoritePrimes,
                                     alertNthPrime: self.alertNthPrime,
+                                    isPrimeModalShown: self.isPrimeModalShown,
                                     isNthPrimeButtonDisabled: self.isNthPrimeButtonDisabled)
         }
         
@@ -60,6 +62,7 @@ extension AppState {
             self.count = newValue.counter.count
             self.favoritePrimes = newValue.favoritePrimes
             self.alertNthPrime = newValue.alertNthPrime
+            self.isPrimeModalShown = newValue.isPrimeModalShown
             self.isNthPrimeButtonDisabled = newValue.isNthPrimeButtonDisabled
         }
     }

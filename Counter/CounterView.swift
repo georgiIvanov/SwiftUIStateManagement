@@ -49,10 +49,12 @@ public struct CounterFeatureState: Equatable {
     public init(count: Int = 0,
                 favoritePrimes: [Int] = [],
                 alertNthPrime: PrimeAlert? = nil,
+                isPrimeModalShown: Bool = false,
                 isNthPrimeButtonDisabled: Bool = false) {
         self.count = count
         self.favoritePrimes = favoritePrimes
         self.alertNthPrime = alertNthPrime
+        self.isPrimeModalShown = isPrimeModalShown
         self.isNthPrimeButtonDisabled = isNthPrimeButtonDisabled
     }
 }
@@ -76,7 +78,7 @@ public struct CounterView: View {
     
     public init(store: Store<CounterFeatureState, CounterFeatureAction>) {
         self.store = store
-        self.viewStore = store.scope(value: CounterView.State.init, action: { $0 })
+        self.viewStore = store.scope(value: CounterView.State.init(counterFeature:), action: { $0 })
         .view
     }
     
@@ -96,7 +98,7 @@ public struct CounterView: View {
             }) {
                 Text("Is this prime?")
             }
-            Button(action: self.nthPrimeButtonAction) {
+            Button(action: { store.send(.counter(.nthPrimeButtonTapped)) }) {
                 Text("What is the \(ordinal(viewStore.value.count)) prime?")
             }
             .disabled(viewStore.value.isNthPrimeButtonDisabled)
@@ -108,15 +110,12 @@ public struct CounterView: View {
                 Alert(title: Text(item.title),
                       dismissButton: .default(Text("Ok"), action: { self.store.send(.counter(.alertDismissButtonTapped)) }))
         })
-        .sheet(isPresented: .constant(viewStore.value.isPrimeModalShown)) {
+        .sheet(isPresented: .constant(viewStore.value.isPrimeModalShown),
+               onDismiss: { store.send(.counter(.primeModalDismissed)) }) {
             IsPrimeModalView(store: store.scope(value: { $0.primeModalViewState },
                                                action: { .primeModal($0) }))
         }
         
-    }
-    
-    func nthPrimeButtonAction() {
-        store.send(.counter(.nthPrimeButtonTapped))
     }
 }
 

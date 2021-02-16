@@ -16,6 +16,7 @@ public enum CounterAction: Equatable {
     case decrTapped
     case incrTapped
     case isPrimeButtonTapped
+    case primeModalDismissed
     case nthPrimeResponse(Int?)
     case nthPrimeButtonTapped
     case alertDismissButtonTapped
@@ -44,6 +45,9 @@ public func counterReducer(state: inout CounterState,
         return []
     case .isPrimeButtonTapped:
         state.isPrimeModalShown = true
+        return []
+    case .primeModalDismissed:
+        state.isPrimeModalShown = false
         return []
     case .nthPrimeButtonTapped:
         state.isNthPrimeButtonDisabled = true
