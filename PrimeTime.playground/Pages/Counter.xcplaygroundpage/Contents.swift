@@ -7,8 +7,8 @@ var environment = (mockNthPrime, mockLog)
 
 PlaygroundPage.current.liveView = UIHostingController(
     rootView: CounterView(
-        store: Store<CounterViewState, CounterViewAction>(
-            initialValue: CounterViewState(
+        store: Store<CounterFeatureState, CounterFeatureAction>(
+            initialValue: CounterFeatureState(
                 count: 5,
                 favoritePrimes: [5],
                 alertNthPrime: nil,

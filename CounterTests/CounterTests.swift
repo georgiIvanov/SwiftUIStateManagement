@@ -21,7 +21,7 @@ class CounterTests: XCTestCase {
     }
     
     func testIncrButtonTapped() throws {
-        assert(initialValue: CounterViewState(count: 2),
+        assert(initialValue: CounterFeatureState(count: 2),
                reducer: counterViewReducer,
                environment: environment,
                steps:
@@ -32,7 +32,7 @@ class CounterTests: XCTestCase {
     }
     
     func testDecrButtonTapped() throws {
-        assert(initialValue: CounterViewState(count: 3),
+        assert(initialValue: CounterFeatureState(count: 3),
                reducer: counterViewReducer,
                environment: environment,
                steps:
@@ -45,7 +45,7 @@ class CounterTests: XCTestCase {
         let nthPrime = 17
         environment.nthPrime = { _ in .sync { nthPrime } }
         
-        assert(initialValue: CounterViewState(alertNthPrime: nil,
+        assert(initialValue: CounterFeatureState(alertNthPrime: nil,
                                               isNthPrimeButtonDisabled: false),
                reducer: counterViewReducer,
                environment: environment,
@@ -107,7 +107,7 @@ class CounterTests: XCTestCase {
         // TODO: Make nth prime return error and test for it
         environment.nthPrime = { _ in .sync { nil } }
         
-        assert(initialValue: CounterViewState(alertNthPrime: nil,
+        assert(initialValue: CounterFeatureState(alertNthPrime: nil,
                                               isNthPrimeButtonDisabled: false),
                reducer: counterViewReducer,
                environment: environment,
@@ -164,7 +164,7 @@ class CounterTests: XCTestCase {
     
     func testPrimeModal() throws {
         
-        assert(initialValue: CounterViewState(count: 1,
+        assert(initialValue: CounterFeatureState(count: 1,
                                               favoritePrimes: [3, 5]),
                reducer: counterViewReducer,
                environment: environment,

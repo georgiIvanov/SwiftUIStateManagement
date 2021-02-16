@@ -87,6 +87,7 @@ public extension Store {
             .removeDuplicates(by: predicate)
             .sink { [weak viewStore] (value) in
                 viewStore?.value = value
+                self
             }
         
         return viewStore

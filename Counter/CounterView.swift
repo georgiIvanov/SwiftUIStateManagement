@@ -9,26 +9,29 @@ import SwiftUI
 import ComposableArchitecture
 import PrimeModal
 import PrimeAlert
+import CasePaths
 
 public typealias CounterState = (
     alertNthPrime: PrimeAlert?,
     count: Int,
-    isNthPrimeButtonDisabled: Bool
+    isNthPrimeButtonDisabled: Bool,
+    isPrimeModalShown: Bool
 )
 
-public struct CounterViewState: Equatable {
+public struct CounterFeatureState: Equatable {
     public var count: Int
     public var favoritePrimes: [Int]
     public var alertNthPrime: PrimeAlert?
+    public var isPrimeModalShown: Bool = false
     public var isNthPrimeButtonDisabled: Bool = false
     
     public var counter: CounterState {
         get {
-            return (alertNthPrime, count, isNthPrimeButtonDisabled)
+            return (alertNthPrime, count, isNthPrimeButtonDisabled, isPrimeModalShown)
         }
         
         set {
-            (alertNthPrime, count, isNthPrimeButtonDisabled) = newValue
+            (alertNthPrime, count, isNthPrimeButtonDisabled, isPrimeModalShown) = newValue
         }
     }
     
@@ -54,18 +57,27 @@ public struct CounterViewState: Equatable {
     }
 }
 
-public enum CounterViewAction: Equatable {
+public enum CounterFeatureAction: Equatable {
     case counter(CounterAction)
     case primeModal(PrimeModalAction)
 }
 
 public struct CounterView: View {
+    struct State: Equatable {
+        let alertNthPrime: PrimeAlert?
+        let count: Int
+        let isNthPrimeButtonDisabled: Bool
+        let isPrimeModalShown: Bool
+    }
     
-    @ObservedObject var store: Store<CounterViewState, CounterViewAction>
-    @State var isPrimeModalShown = false
     
-    public init(store: Store<CounterViewState, CounterViewAction>) {
+    let store: Store<CounterFeatureState, CounterFeatureAction>
+    @ObservedObject var viewStore: ViewStore<State>
+    
+    public init(store: Store<CounterFeatureState, CounterFeatureAction>) {
         self.store = store
+        self.viewStore = store.scope(value: CounterView.State.init, action: { $0 })
+        .view
     }
     
     public var body: some View {
@@ -74,29 +86,29 @@ public struct CounterView: View {
                 Button(action: { store.send(.counter(.decrTapped)) }) {
                     Text("-")
                 }
-                Text("\(store.value.count)")
+                Text("\(viewStore.value.count)")
                 Button(action: { store.send(.counter(.incrTapped)) }) {
                     Text("+")
                 }
             }
             Button(action: {
-                self.isPrimeModalShown = true
+                store.send(.counter(.isPrimeButtonTapped))
             }) {
                 Text("Is this prime?")
             }
             Button(action: self.nthPrimeButtonAction) {
-                Text("What is the \(ordinal(store.value.count)) prime?")
+                Text("What is the \(ordinal(viewStore.value.count)) prime?")
             }
-            .disabled(self.store.value.isNthPrimeButtonDisabled)
+            .disabled(viewStore.value.isNthPrimeButtonDisabled)
         }
         .font(.title)
         .navigationTitle("Counter demo")
-        .alert(item: .constant(store.value.alertNthPrime),
+        .alert(item: .constant(viewStore.value.alertNthPrime),
                content: { (item: PrimeAlert) -> Alert in
                 Alert(title: Text(item.title),
                       dismissButton: .default(Text("Ok"), action: { self.store.send(.counter(.alertDismissButtonTapped)) }))
         })
-        .sheet(isPresented: self.$isPrimeModalShown) {
+        .sheet(isPresented: .constant(viewStore.value.isPrimeModalShown)) {
             IsPrimeModalView(store: store.scope(value: { $0.primeModalViewState },
                                                action: { .primeModal($0) }))
         }
@@ -108,3 +120,11 @@ public struct CounterView: View {
     }
 }
 
+extension CounterView.State {
+    init(counterFeature: CounterFeatureState) {
+        self.alertNthPrime = counterFeature.alertNthPrime
+        self.count = counterFeature.count
+        self.isNthPrimeButtonDisabled = counterFeature.isNthPrimeButtonDisabled
+        self.isPrimeModalShown = counterFeature.isPrimeModalShown
+    }
+}

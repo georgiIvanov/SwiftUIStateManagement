@@ -15,19 +15,20 @@ import CasePaths
 public enum CounterAction: Equatable {
     case decrTapped
     case incrTapped
+    case isPrimeButtonTapped
     case nthPrimeResponse(Int?)
     case nthPrimeButtonTapped
     case alertDismissButtonTapped
 }
 
-public let counterViewReducer: Reducer<CounterViewState, CounterViewAction, CounterEnvironment> = combine(
+public let counterViewReducer: Reducer<CounterFeatureState, CounterFeatureAction, CounterEnvironment> = combine(
     pullback(counterReducer,
-             value: \CounterViewState.counter,
-             action: /CounterViewAction.counter,
+             value: \CounterFeatureState.counter,
+             action: /CounterFeatureAction.counter,
              environment: { $0 }),
     pullback(primeModalReducer,
              value: \.primeModalViewState,
-             action: /CounterViewAction.primeModal,
+             action: /CounterFeatureAction.primeModal,
              environment: { _ in () })
 )
 
@@ -40,6 +41,9 @@ public func counterReducer(state: inout CounterState,
         return []
     case .incrTapped:
         state.count += 1
+        return []
+    case .isPrimeButtonTapped:
+        state.isPrimeModalShown = true
         return []
     case .nthPrimeButtonTapped:
         state.isNthPrimeButtonDisabled = true

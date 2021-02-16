@@ -11,7 +11,7 @@ import Counter
 
 // All the actions user can perform in the App
 enum AppAction: Equatable {
-    case counterView(CounterViewAction)
-    case offlineCounterView(CounterViewAction)
+    case counterView(CounterFeatureAction)
+    case offlineCounterView(CounterFeatureAction)
     case favoritePrimes(FavoritePrimesAction)
 }

@@ -48,9 +48,9 @@ extension AppState {
         }
     }
     
-    var counterView: CounterViewState {
+    var counterView: CounterFeatureState {
         get {
-            return CounterViewState(count: self.count,
+            return CounterFeatureState(count: self.count,
                                     favoritePrimes: self.favoritePrimes,
                                     alertNthPrime: self.alertNthPrime,
                                     isNthPrimeButtonDisabled: self.isNthPrimeButtonDisabled)
